@@ -4,7 +4,7 @@
   "description": "my class project",
   "main": "controller/server.js",
   "scripts": {
-    "pm2": "pm2 start process.json --no-daemon",
+    "pm2": "pm2 start process.json",
     "test": "jest",
     "start": "NODE_PATH=./build node build/server.js",
     "build": "tsc -p .",
