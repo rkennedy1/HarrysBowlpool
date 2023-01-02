@@ -1,12 +1,12 @@
 # Dockerfile
 
-FROM node:16 as base
+FROM node:lts as base
 
 WORKDIR /home/node/app
 
 COPY package*.json ./
 
-RUN npm i
+RUN yarn
 
 COPY . .
 
@@ -14,8 +14,8 @@ FROM base as production
 
 ENV NODE_PATH=./build
 
-EXPOSE 3000
+EXPOSE 1313
 
-RUN npm run build
+RUN yarn build
 
-CMD ["npm", "run", "pm2"]
+COPY . .

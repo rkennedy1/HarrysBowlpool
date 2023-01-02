@@ -1,0 +1,50 @@
+version: '3.6'
+
+services: 
+  db:
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
+    environment: 
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_DATABASE: bowlpool
+      MYSQL_USER: ${MYSQL_USER}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+    ports:
+      - 3307:3306
+    volumes: 
+      - ./init:/docker-entrypoint-initdb.d
+  
+  server:
+    depends_on:
+      - db
+    build: 
+      context: ./Server
+      target: base
+    env_file:
+      - .env
+    expose:
+      - '1313'
+    ports:
+      - '1313:1313'
+    command: yarn start
+  
+  web:
+    depends_on:
+      - server
+    image: bowlpool/web:latest
+    # build: 
+    #   context: ./Web
+    #   target: baseweb
+    env_file:
+      - .env
+    expose:
+      - "80"
+    ports:
+      - "80:80"
+      
+  adminer:
+    image: adminer
+    restart: always
+    ports: 
+      - 8080:8080
