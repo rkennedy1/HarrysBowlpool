@@ -61,8 +61,7 @@ export function BowlpoolTableBody(props) {
                         g.homeTeam.line,
                         g.awayTeam.line
                       ) &&
-                        g.homeTeam.score &&
-                        g.awayTeam.score ? (
+                        (g.homeTeam.score || g.awayTeam.score) ? (
                         <td key={j + q + 'home'} className="entry">
                           {pick.isHome ? '1' : ''}
                         </td>
@@ -123,8 +122,7 @@ export function BowlpoolTableBody(props) {
                         g.homeTeam.line,
                         g.awayTeam.line
                       ) &&
-                        g.homeTeam.score &&
-                        g.awayTeam.score ? (
+                        (g.homeTeam.score || g.awayTeam.score) ? (
                         <td key={j + q + 'away'} className="entry" id="away">
                           {!pick.isHome ? '1' : ''}
                         </td>
