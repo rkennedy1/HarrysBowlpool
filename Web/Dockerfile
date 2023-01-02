@@ -1,7 +1,7 @@
 # Dockerfile
 
 #Stage 1
-FROM node:19.3 as base
+FROM node:19 as baseweb
 
 WORKDIR /home/node/app
 
@@ -22,5 +22,5 @@ WORKDIR /usr/share/nginx/html
 
 RUN rm -rf ./*
 
-COPY --from=base /home/node/app/build .
+COPY --from=baseweb /home/node/app/build .
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]

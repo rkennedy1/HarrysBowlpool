@@ -18,4 +18,4 @@ EXPOSE 1313
 
 RUN yarn build
 
-CMD ["yarn", "start"]
+COPY . .
