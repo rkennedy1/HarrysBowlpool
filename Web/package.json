@@ -30,7 +30,6 @@
     "deploy-production": "export REACT_APP_API_URL='https://api.harrysbowlpool.com' && react-scripts build && scp -r ./build/* root@harrysbowlpool.com:/var/www/www.harrysbowlpool.com/build",
     "deploy-testing": "export REACT_APP_API_URL='http://testing.harrysbowlpool.com:1313'&& react-scripts build && scp -r ./build/* root@testing.harrysbowlpool.com:/var/www/html",
     "start": "react-scripts start",
-    "serve": "serve -l 80 -s build",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
