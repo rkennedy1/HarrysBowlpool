@@ -14,6 +14,10 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
+    "@types/jest": "^29.5.4",
+    "@types/node": "^20.5.9",
+    "@types/react": "^18.2.21",
+    "@types/react-dom": "^18.2.7",
     "axios": "^1.2.0",
     "bootstrap": "^5.2.3",
     "jquery": "^3.6.1",
@@ -24,7 +28,7 @@
     "react-router-dom": "^6.4.2",
     "react-scripts": "^5.0.1",
     "styled-components": "^5.3.6",
-    "typescript": "^4.9.3"
+    "typescript": "^5.2.2"
   },
   "scripts": {
     "deploy-production": "export REACT_APP_API_URL='https://api.harrysbowlpool.com' && react-scripts build && scp -r ./build/* root@harrysbowlpool.com:/var/www/www.harrysbowlpool.com/build",

@@ -1,9 +1,10 @@
 import axios from 'axios';
 
 export class bowlpoolRepo {
-  url = process.env.REACT_APP_API_URL
-    ? process.env.REACT_APP_API_URL
-    : process.env.REACT_APP_API_URL_DEV;
+  url =
+    process.env.REACT_APP_USE_DEV
+      ? process.env.REACT_APP_API_URL_DEV
+      : process.env.REACT_APP_API_URL;
 
   getGameData(year) {
     return new Promise((resolve, reject) => {

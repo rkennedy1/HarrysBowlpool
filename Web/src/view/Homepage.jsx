@@ -17,7 +17,7 @@ export function Homepage() {
   };
 
   return (
-    <Grid container spacing={2}>
+    <Grid container>
       <Grid item xs={6}>
         <h3 className="m-2">Harry's Bowlpool</h3>
       </Grid>
