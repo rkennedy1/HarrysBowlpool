@@ -1,7 +1,16 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React from 'react';
+import { Player } from '../../util/DataModels';
 
-export function BowlpoolTableHeader(props) {
+interface BowlpoolTableHeaderProps {
+  playerData: Player[];
+  hideBowlData: boolean;
+}
+
+export const BowlpoolTableHeader: React.FC<BowlpoolTableHeaderProps> = (
+  props
+) => {
   return (
     <thead>
       <tr>
@@ -21,7 +30,7 @@ export function BowlpoolTableHeader(props) {
         <th className="sticky-top bg-light" id="header">
           Score
         </th>
-        {props.playerData !== [] &&
+        {props.playerData !== undefined &&
           props.playerData.map((p, i) => {
             return (
               <th key={i} className="sticky-top bg-light" id="header">
@@ -38,4 +47,4 @@ export function BowlpoolTableHeader(props) {
       </tr>
     </thead>
   );
-}
+};

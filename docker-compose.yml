@@ -9,11 +9,12 @@ services:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
       MYSQL_DATABASE: bowlpool
       MYSQL_USER: ${MYSQL_USER}
-      MYSQL_PASSWORD: ${MYSQL_PASSWORD}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD} 
     ports:
       - 3307:3306
     volumes: 
       - ./init:/docker-entrypoint-initdb.d
+    
   
   server:
     depends_on:
@@ -32,16 +33,17 @@ services:
   web:
     depends_on:
       - server
-    image: bowlpool/web:latest
-    # build: 
-    #   context: ./Web
-    #   target: baseweb
+    build: 
+      context: ./Web
+      target: baseweb
     env_file:
       - .env
     expose:
       - "80"
     ports:
-      - "80:80"
+      - "80:3000"
+    command: yarn start
+
       
   adminer:
     image: adminer
