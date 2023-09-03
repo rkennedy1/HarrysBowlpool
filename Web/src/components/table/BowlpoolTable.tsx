@@ -1,21 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { bowlpoolRepo } from '../controller/bowlpoolRepo';
-import '../styles/bowlpool.css';
+import { bowlpoolRepo } from '../../util/bowlpoolRepo';
+import '../../styles/bowlpool.css';
 import { BowlpoolTableHeader } from './BowlpoolTableHeader';
 import { BowlpoolTableFooter } from './BowlpoolTableFooter';
 import { BowlpoolTableBody } from './BowlpoolTableBody';
+import { BowlGame, Player } from '../../util/DataModels';
 
 const bpr = new bowlpoolRepo();
 
-export function BowlpoolTable(props) {
-  const [gameData, setGameData] = useState([]);
-  const [playerData, setPlayerData] = useState([]);
+interface bowlpoolTableProps {
+  year: number;
+  hideBowlData: boolean;
+}
+
+export const BowlpoolTable: React.FC<bowlpoolTableProps> = (props) => {
+  const [gameData, setGameData] = useState<BowlGame[]>([]);
+  const [playerData, setPlayerData] = useState<Player[]>([]);
 
   useEffect(() => {
-    bpr.getGameData(props.year).then((data) => setGameData(data));
-    bpr.getPlayerData(props.year).then((data) => setPlayerData(data));
+    bpr.getGameData(props.year).then((data: BowlGame[]) => setGameData(data));
+    bpr.getPlayerData(props.year).then((data: Player[]) => setPlayerData(data));
   }, [props.year]);
 
   return (
@@ -35,4 +41,4 @@ export function BowlpoolTable(props) {
       />
     </table>
   );
-}
+};

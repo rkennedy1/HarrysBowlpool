@@ -1,8 +1,18 @@
 import React from 'react';
 import moment from 'moment';
 import { BowlpoolTableCell } from './BowlpoolTableCell';
+import { BowlGame, Player } from '../../util/DataModels';
 
-export function BowlpoolTableAwayRow(props) {
+interface BowlpoolTableAwayRowProps {
+  game: BowlGame;
+  playerData: Player[];
+  didWin: boolean;
+  hideBowlData: boolean;
+}
+
+export const BowlpoolTableAwayRow: React.FC<BowlpoolTableAwayRowProps> = (
+  props
+) => {
   return (
     <tr className={props.didWin ? 'table-success' : 'bg-light'}>
       {!props.hideBowlData && (
@@ -24,21 +34,23 @@ export function BowlpoolTableAwayRow(props) {
             ? `${props.game.awayTeam.score} (${props.game.awayTeam.line})`
             : `N/A (${props.game.awayTeam.line})`
           : props.game.awayTeam.score || props.game.homeTeam.score
-          ? props.game.awayTeam.score
+          ? props.game.awayTeam.score.toString()
           : 'N/A'}
       </th>
-      {props.playerData !== [] &&
+      {props.playerData !== undefined &&
         props.playerData.map((player, j) =>
           player.picks.map((pick, q) => {
             if (pick.gameId === props.game.gameId) {
               return !pick.isHome ? (
                 <BowlpoolTableCell key={q} didWin={props.didWin} id="away" />
               ) : (
-                <td key={q} id="away"></td>
+                <td id="away"></td>
               );
+            } else {
+              return '';
             }
           })
         )}
     </tr>
   );
-}
+};

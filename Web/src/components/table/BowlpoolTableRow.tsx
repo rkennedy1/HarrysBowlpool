@@ -1,19 +1,22 @@
 import React from 'react';
 import { BowlpoolTableHomeRow } from './BowlpoolTableHomeRow';
 import { BowlpoolTableAwayRow } from './BowlpoolTableAwayRow';
+import { BowlGame, Player } from '../../util/DataModels';
 
-function convertLine(line) {
+function convertLine(line: string): number {
   console.log(line);
   if (line.length > 1) {
+    let parsedLine = parseFloat(line.slice(1));
     if (line.slice(0, 1) === '+') {
-      return parseFloat(line.slice(1));
+      return parsedLine;
     } else if (line.slice(0, 1) === '-') {
-      return parseFloat(-line.slice(1));
+      return -parsedLine;
     }
   }
+  return 0;
 }
 
-function checkIfHomeWon(game) {
+function checkIfHomeWon(game: BowlGame) {
   let homeTeamLine = convertLine(game.homeTeam.line)
     ? convertLine(game.homeTeam.line)
     : 0;
@@ -29,18 +32,26 @@ function checkIfHomeWon(game) {
   }
 }
 
-export function BowlpoolTableRow(props) {
+interface BowlpoolTableRowProps {
+  gameData: BowlGame;
+  playerData: Player[];
+  hideBowlData: boolean;
+}
+
+export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
   return (
     <React.Fragment>
       <BowlpoolTableHomeRow
         game={props.gameData}
         playerData={props.playerData}
         didWin={checkIfHomeWon(props.gameData)}
+        hideBowlData={props.hideBowlData}
       />
       <BowlpoolTableAwayRow
         game={props.gameData}
         playerData={props.playerData}
         didWin={!checkIfHomeWon(props.gameData)}
+        hideBowlData={props.hideBowlData}
       />
       <tr>
         <td>
@@ -49,4 +60,4 @@ export function BowlpoolTableRow(props) {
       </tr>
     </React.Fragment>
   );
-}
+};
