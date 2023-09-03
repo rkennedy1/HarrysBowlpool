@@ -15,7 +15,6 @@ export type BowlTeam = {
 
 export type Player = {
   playerId: number;
-
   name: string;
   points: number;
   year: number;
