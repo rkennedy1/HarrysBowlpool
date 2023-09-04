@@ -2,6 +2,7 @@ import React from 'react';
 import { BowlpoolTableHomeRow } from './BowlpoolTableHomeRow';
 import { BowlpoolTableAwayRow } from './BowlpoolTableAwayRow';
 import { BowlGame, Player } from '../../util/DataModels';
+import { GameCard } from '../cards/GameCard';
 
 function convertLine(line: string): number {
   if (line.length > 1) {

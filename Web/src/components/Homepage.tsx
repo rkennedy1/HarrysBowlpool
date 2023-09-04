@@ -1,10 +1,10 @@
-import { useState } from 'react';
-import React from 'react';
+import React, { useState } from 'react';
 
 // import { BowlpoolTabs } from "./BowlpoolTabs";
 import { Grid, Switch, Tooltip } from '@mui/material';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import { BowlpoolTable } from '../components/table/BowlpoolTable';
+import { GameCard } from './cards/GameCard';
 
 export function Homepage() {
   const [checked, setChecked] = useState(() => {
