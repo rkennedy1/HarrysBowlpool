@@ -2,9 +2,10 @@ import axios from 'axios';
 import { BowlGame, Player } from './DataModels';
 
 export class bowlpoolRepo {
-  url = process.env.REACT_APP_USE_DEV
-    ? process.env.REACT_APP_API_URL_DEV
-    : process.env.REACT_APP_API_URL;
+  url =
+    process.env.REACT_APP_USE_DEV === 'true'
+      ? process.env.REACT_APP_API_URL_DEV
+      : process.env.REACT_APP_API_URL;
 
   getGameData(year: number) {
     return new Promise<BowlGame[]>((resolve, reject) => {

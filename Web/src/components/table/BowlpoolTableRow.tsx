@@ -4,7 +4,6 @@ import { BowlpoolTableAwayRow } from './BowlpoolTableAwayRow';
 import { BowlGame, Player } from '../../util/DataModels';
 
 function convertLine(line: string): number {
-  console.log(line);
   if (line.length > 1) {
     let parsedLine = parseFloat(line.slice(1));
     if (line.slice(0, 1) === '+') {

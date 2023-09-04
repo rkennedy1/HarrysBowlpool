@@ -26,6 +26,7 @@ export function Homepage() {
       <Grid item xs={6}>
         <Tooltip title="Enable this slider to hide the bowl game name, date and each team's record">
           <FormControlLabel
+            name="switchBowlGameDetails"
             control={<Switch checked={checked} onChange={switchHandler} />}
             label="Hide bowl game details"
           />

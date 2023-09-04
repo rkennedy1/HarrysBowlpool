@@ -44,7 +44,7 @@ export const BowlpoolTableAwayRow: React.FC<BowlpoolTableAwayRowProps> = (
               return !pick.isHome ? (
                 <BowlpoolTableCell key={q} didWin={props.didWin} id="away" />
               ) : (
-                <td id="away"></td>
+                <td key={q} id="away"></td>
               );
             } else {
               return '';
