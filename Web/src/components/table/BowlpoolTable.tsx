@@ -44,11 +44,11 @@ export const BowlpoolTable: React.FC<bowlpoolTableProps> = (props) => {
     //     playerData={playerData}
     //   />
     // </table>
-    <Grid container>
+    <Grid container spacing={2}>
       {loading &&
         gameData.map((game, i) => {
           return (
-            <Grid item xs={8}>
+            <Grid item xs={12} lg={4} md={6}>
               <GameCard key={i} game={game} players={playerData} />
             </Grid>
           );
