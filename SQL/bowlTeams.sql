@@ -1,6 +1,7 @@
 USE bowlpool;
 DROP TABLE IF EXISTS `bowlTeams`;
 CREATE TABLE `bowlTeams` (
+`version` int NOT NULL,
 `teamId` int(8) NOT NULL,
 `bowlId` int(9),
 `year` VARCHAR(4),
