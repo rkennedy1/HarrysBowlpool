@@ -1,6 +1,7 @@
 USE bowlpool;
 DROP TABLE IF EXISTS `bowlGameScore`;
 CREATE TABLE `bowlGameScore` (
+`version` int NOT NULL,
 `gameId` int(9) NOT NULL,
 `homeFirstQuarterScore` int(3),
 `homeSecondQuarterScore` int(3),
