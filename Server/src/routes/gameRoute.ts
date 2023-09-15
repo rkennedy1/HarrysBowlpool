@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { connection } from '../helpers/db';
 import { getTeamIdRange } from '../helpers/teamId';
-import _ from 'lodash';
+import _, { isEmpty } from 'lodash';
 
 export interface BowlGame {
   gameId: number;
@@ -38,12 +38,23 @@ export function createBowlGames(bowlGames: BowlGame[], bowlTeams: BowlTeam[]) {
 
 export const gameRoute = express.Router();
 gameRoute.get('/gameData/:year', (req: Request, res: Response) => {
+  var version = 0
+  if (!isEmpty(req.query.version)) {
+    version = parseInt(req.query.version as string)
+  }
   let teamIdRange = getTeamIdRange(req.params['year']);
-  let query = `SELECT * FROM bowlGames WHERE homeTeam > ${teamIdRange.lowerBound} AND homeTeam < ${teamIdRange.upperBound}`;
+  let query = `SELECT * FROM bowlGames 
+                    WHERE homeTeam > ${teamIdRange.lowerBound} 
+                    AND homeTeam < ${teamIdRange.upperBound}
+                    AND version > ${version}`;
+  let values = []
   connection.query(query, function (err: Error, results: BowlGame[]) {
     if (err) throw console.error(err);
     let bowlGames = JSON.parse(JSON.stringify(results));
-    query = `SELECT * FROM bowlTeams WHERE teamId > ${teamIdRange.lowerBound} AND teamId < ${teamIdRange.upperBound}`;
+    query = `SELECT * FROM bowlTeams 
+                WHERE teamId > ${teamIdRange.lowerBound} 
+                AND teamId < ${teamIdRange.upperBound}
+                AND version > ${version}`;
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));
       let mergedResults = createBowlGames(bowlGames, bowlTeams);

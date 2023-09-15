@@ -30,6 +30,8 @@ export function createPlayersPicks(players: Player[], picks: Pick[]) {
   }) as Player[];
 }
 
+// TODO discuss - but i think we skip versioning this guy for now
+// TODO we are going to do this 
 export const playerRoute = express.Router();
 playerRoute.get('/playerData/:year', (req: Request, res: Response) => {
   let playerIdRange = getTeamIdRange(req.params['year']);

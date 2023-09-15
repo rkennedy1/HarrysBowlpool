@@ -14,6 +14,7 @@ def getMyDB():
             user=os.getenv('MYSQL_USER'),
             password=os.getenv('MYSQL_PASSWORD'),
             database=os.getenv('MYSQL_DATABASE'),
+            port=os.getenv('MYSQL_PORT'),
             raise_on_warnings=True
         )
     except mysql.connector.Error as err:

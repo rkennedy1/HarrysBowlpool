@@ -27,6 +27,7 @@ def didHomeTeamWin(homeTeam, awayTeam):
 
 
 def updatePlayerScore(playerId, points):
+    # TODO update the version
     query = """UPDATE players SET points=%s WHERE playerId=%s"""
     values = (points, playerId)
     try:
@@ -38,21 +39,26 @@ def updatePlayerScore(playerId, points):
 
 
 def refreshAllPlayerData(year):
+    # TODO get next version number 
     players = getPlayersFromDatabase(year)
     games = getGamesFromDatabase(year)
 
     for game in games:
         homeTeam = getTeamFromDatabase(game[2])
         awayTeam = getTeamFromDatabase(game[3])
-        if (homeTeam[0][-1] is not None and awayTeam[0][-1] is not None):
+        if homeTeam[0][-1] is not None and awayTeam[0][-1] is not None:
             homeWin = didHomeTeamWin(homeTeam, awayTeam)
             for player in players:
                 for pick in player[-1]:
-                    if pick[2] == game[0] and ((homeWin and pick[3]) or (not homeWin and not pick[3])):
+                    if pick[2] == game[0] and (
+                        (homeWin and pick[3]) or (not homeWin and not pick[3])
+                    ):
                         player[2] += 1
     playerUpdates = 0
     for player in players:
+        # TODO get previous score and check if changed, pdate if changed
         playerUpdates += updatePlayerScore(player[0], player[2])
+    # TODO update next number
     printStats(playerUpdates, year)
 
 
@@ -78,7 +84,7 @@ def getPicksForPlayerFromDatabase(playerId):
 
 def getPlayersFromDatabase(year):
     query = """SELECT * FROM players WHERE playerId > %s AND playerId < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year+1)) + "00000"))
+    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
     try:
         cursor.execute(query, values)
         players = cursor.fetchall()
@@ -109,7 +115,7 @@ def getTeamFromDatabase(teamId):
 
 def getGamesFromDatabase(year):
     query = """SELECT * FROM bowlGames WHERE homeTeam > %s AND homeTeam < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year+1)) + "00000"))
+    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
     try:
         cursor.execute(query, values)
         games = cursor.fetchall()
