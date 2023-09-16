@@ -1,7 +1,6 @@
 USE bowlpool;
 DROP TABLE IF EXISTS `bowlTeams`;
 CREATE TABLE `bowlTeams` (
-`version` int NOT NULL,
 `teamId` int(8) NOT NULL,
 `bowlId` int(9),
 `year` VARCHAR(4),
@@ -15,39 +14,40 @@ CREATE TABLE `bowlTeams` (
 `thirdQuarterScore` INT(2),
 `fourthQuarterScore` INT(2),
 `score` INT(3),
+`version` int NOT NULL,
 PRIMARY KEY (`teamId`)
 );
 
 USE bowlpool;
 DROP TABLE IF EXISTS `bowlGames`;
 CREATE TABLE `bowlGames` (
-`version` int NOT NULL,
 `gameId` int(9) NOT NULL,
 `startTime` datetime,
 `homeTeam` int(9),
 `awayTeam` int(9),
 `bowlName` VARCHAR(255),
+`version` int NOT NULL,
 PRIMARY KEY (`gameId`)
 );
 
 USE bowlpool;
 DROP TABLE IF EXISTS `players`;
 CREATE TABLE `players` (
-`version` int NOT NULL,
 `playerId` int(9) NOT NULL,
 `name` VARCHAR(255),
 `points` int(3),
 `year` int(4), 
+`version` int NOT NULL,
 PRIMARY KEY (`playerId`)
 );
 
 USE bowlpool;
 DROP TABLE IF EXISTS `playerPicks`;
 CREATE TABLE `playerPicks` (
-`version` int NOT NULL,
 `pickId` BIGINT(13) NOT NULL,
 `playerId` int(9) NOT NULL,
 `gameId` int(9) NOT NULL,
 `isHome` boolean,
+`version` int NOT NULL,
 PRIMARY KEY (`pickId`)
 );
