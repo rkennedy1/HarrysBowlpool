@@ -1,5 +1,6 @@
 USE bowlpool;
 DROP TABLE IF EXISTS `version`;
 CREATE TABLE `version` (
-`version` int NOT NULL)
-;
+  `year` int NOT NULL,
+  `currentVersion` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`year`))
