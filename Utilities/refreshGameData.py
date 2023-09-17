@@ -3,8 +3,7 @@ from mysqlConnection import getMyDB
 import mysql.connector
 from datetime import datetime
 import sys
-from versionUtil import getCurrentVersion
-from versionUtil import incrementVersion
+from versionUtil import getCurrentVersion, incrementVersion
 
 # Establish the CFB API connection
 API = cfbdAPI.api
@@ -54,8 +53,7 @@ def updateTeam(gameAPI, gameDB, isHome, version):
         if currentScore != newScore:
             updateCurrentScore(teamId, conference, scores, version)
             return 1
-    else:
-        return 0
+    return 0
 
 
 def updateCurrentScore(teamId, conference, scores, version):

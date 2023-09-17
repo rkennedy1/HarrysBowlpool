@@ -1,6 +1,7 @@
 from mysqlConnection import getMyDB
 import mysql.connector
 import sys
+from versionUtil import getCurrentVersion, incrementVersion
 
 # Establish the database connection
 mydb = getMyDB()
@@ -26,9 +27,9 @@ def didHomeTeamWin(homeTeam, awayTeam):
     return False
 
 
-def updatePlayerScore(playerId, points):
-    query = """UPDATE players SET points=%s WHERE playerId=%s"""
-    values = (points, playerId)
+def updatePlayerScore(playerId, points, version):
+    query = """UPDATE players SET points=%s, version=%s WHERE playerId=%s"""
+    values = (points, version, playerId)
     try:
         cursor.execute(query, values)
         return 1
@@ -38,27 +39,36 @@ def updatePlayerScore(playerId, points):
 
 
 def refreshAllPlayerData(year):
+    version = getCurrentVersion(year) + 1
     players = getPlayersFromDatabase(year)
     games = getGamesFromDatabase(year)
+    newScores = [0] * len(players)
 
     for game in games:
         homeTeam = getTeamFromDatabase(game[2])
         awayTeam = getTeamFromDatabase(game[3])
-        if (homeTeam[0][-1] is not None and awayTeam[0][-1] is not None):
+        if homeTeam[0][-1] is not None and awayTeam[0][-1] is not None:
             homeWin = didHomeTeamWin(homeTeam, awayTeam)
-            for player in players:
+            for idx, player in enumerate(players):
                 for pick in player[-1]:
-                    if pick[2] == game[0] and ((homeWin and pick[3]) or (not homeWin and not pick[3])):
-                        player[2] += 1
+                    if pick[2] == game[0] and (
+                        (homeWin and pick[3]) or (not homeWin and not pick[3])
+                    ):
+                        newScores[idx] += 1
     playerUpdates = 0
-    for player in players:
-        playerUpdates += updatePlayerScore(player[0], player[2])
-    printStats(playerUpdates, year)
+    for idx, player in enumerate(players):
+        if player[2] != newScores[idx]:
+            playerUpdates += updatePlayerScore(player[0], newScores[idx], version)
+    if playerUpdates > 0:
+        incrementVersion(year)
+        printStats(playerUpdates, year, version)
+    else:
+        print("No updates were made")
 
 
-def printStats(playerUpdates, year):
+def printStats(playerUpdates, year, version):
     print("-------------------------------")
-    print("-------UPDATES FOR " + str(year) + "--------")
+    print("-------UPDATES FOR " + str(year) + " v" + str(version) + "--------")
     print("-------------------------------")
     print("Successful updates to players: " + str(playerUpdates))
     print("-------------------------------")
@@ -78,14 +88,14 @@ def getPicksForPlayerFromDatabase(playerId):
 
 def getPlayersFromDatabase(year):
     query = """SELECT * FROM players WHERE playerId > %s AND playerId < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year+1)) + "00000"))
+    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
     try:
         cursor.execute(query, values)
         players = cursor.fetchall()
         result = []
         for player in players:
             result.append(list(player))
-            result[-1:][0][2] = 0
+            # result[-1:][0][2] = 0
             result[-1:][0].append(getPicksForPlayerFromDatabase(result[-1:][0][0]))
         return result
 
@@ -109,7 +119,7 @@ def getTeamFromDatabase(teamId):
 
 def getGamesFromDatabase(year):
     query = """SELECT * FROM bowlGames WHERE homeTeam > %s AND homeTeam < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year+1)) + "00000"))
+    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
     try:
         cursor.execute(query, values)
         games = cursor.fetchall()
