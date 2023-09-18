@@ -1,8 +1,5 @@
-import cfbdAPI
-from mysqlConnection import getMyDB
 import mysql.connector
-from datetime import datetime
-import sys
+from mysqlConnection import getMyDB
 
 
 # Establish the database connection
@@ -30,12 +27,15 @@ def getCurrentVersion(year):
 
 
 def incrementVersion(year):
-    update = "UPDATE version SET currentVersion = currentVersion + 1 where year=%s"
+    update = "UPDATE version SET currentVersion = currentVersion + 1 WHERE year = %s"
     values = [year]
-
     # Update the currentVersion for next time..
     try:
         cursor.execute(update, values)
+        cursor.close()
+        mydb.commit()
+        mydb.close()
+
     except mysql.connector.Error as e:
         print("ERROR udpating version table with next version")
         print(e)
