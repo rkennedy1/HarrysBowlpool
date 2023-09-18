@@ -68,8 +68,9 @@ def refreshAllPlayerData(year):
 
 def printStats(playerUpdates, year, version):
     print("-------------------------------")
-    print("-------UPDATES FOR " + str(year) + " v" + str(version) + "--------")
+    print("-------UPDATES FOR " + str(year) + "--------")
     print("-------------------------------")
+    print("Version: " + str(version))
     print("Successful updates to players: " + str(playerUpdates))
     print("-------------------------------")
 
