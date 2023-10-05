@@ -45,9 +45,7 @@ gameRoute.get('/gameData/:year', async (req: Request, res: Response) => {
   if (!isEmpty(req.query.version)) {
     version = parseInt(req.query.version as string);
   }
-  console.log(version);
   let currentVersion = await getCurrentVersion(year);
-  console.log(currentVersion);
 
   if (version < currentVersion) {
     let teamIdRange = getTeamIdRange(year);
