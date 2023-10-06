@@ -72,7 +72,7 @@ gameRoute.get('/gameData/:year', async (req: Request, res: Response) => {
 
 export const gameRouteDelta = express.Router();
 gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
-  var version = 0;
+  var version = -1;
   if (!isEmpty(req.query.version)) {
     version = parseInt(req.query.version as string);
     version = version == 0 ? -1 : version;
