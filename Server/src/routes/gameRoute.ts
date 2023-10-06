@@ -75,6 +75,7 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   var version = 0;
   if (!isEmpty(req.query.version)) {
     version = parseInt(req.query.version as string);
+    version = version == 0 ? -1 : version;
   }
   let year = req.params['year'];
   let currentVersion = await getCurrentVersion(year);
@@ -82,8 +83,7 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   let query = `SELECT * FROM bowlGames 
                     WHERE homeTeam > ${teamIdRange.lowerBound} 
                     AND homeTeam < ${teamIdRange.upperBound}
-                    AND version > ${version}
-                    OR version = 0`;
+                    AND version > ${version}`;
   let values = [];
   connection.query(query, function (err: Error, results: BowlGame[]) {
     if (err) throw console.error(err);
@@ -91,8 +91,7 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
     query = `SELECT * FROM bowlTeams 
                 WHERE teamId > ${teamIdRange.lowerBound} 
                 AND teamId < ${teamIdRange.upperBound}
-                AND version > ${version}
-                OR version = 0`;
+                AND version > ${version}`;
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));
       let mergedResults = createBowlGames(bowlGames, bowlTeams);

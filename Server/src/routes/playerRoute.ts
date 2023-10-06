@@ -62,17 +62,18 @@ playerRoute.get('/playerData/:year', async (req: Request, res: Response) => {
 playerRoute.get(
   '/playerData/delta/:year',
   async (req: Request, res: Response) => {
-    var version = 0;
+    var version = -1;
     if (!isEmpty(req.query.version)) {
       version = parseInt(req.query.version as string);
+      version = version == 0 ? -1 : version;
     }
     let year = req.params['year'];
     let currentVersion = await getCurrentVersion(year);
     let playerIdRange = getTeamIdRange(year);
-    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version} OR version = 0`;
+    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
-      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version} OR version = 0`;
+      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
       connection.query(query, function (err: Error, picks: Pick[]) {
         if (err) throw console.error(err);
         let mergedResults = createPlayersPicks(
