@@ -82,7 +82,8 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   let query = `SELECT * FROM bowlGames 
                     WHERE homeTeam > ${teamIdRange.lowerBound} 
                     AND homeTeam < ${teamIdRange.upperBound}
-                    AND version > ${version}`;
+                    AND version > ${version}
+                    OR version = 0`;
   let values = [];
   connection.query(query, function (err: Error, results: BowlGame[]) {
     if (err) throw console.error(err);
@@ -90,7 +91,8 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
     query = `SELECT * FROM bowlTeams 
                 WHERE teamId > ${teamIdRange.lowerBound} 
                 AND teamId < ${teamIdRange.upperBound}
-                AND version > ${version}`;
+                AND version > ${version}
+                OR version = 0`;
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));
       let mergedResults = createBowlGames(bowlGames, bowlTeams);

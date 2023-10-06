@@ -52,7 +52,6 @@ playerRoute.get('/playerData/:year', async (req: Request, res: Response) => {
           JSON.parse(JSON.stringify(picks))
         );
         res.send({ version: currentVersion, players: mergedResults });
-        console.log('hello');
       });
     });
   } else {
@@ -70,10 +69,10 @@ playerRoute.get(
     let year = req.params['year'];
     let currentVersion = await getCurrentVersion(year);
     let playerIdRange = getTeamIdRange(year);
-    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
+    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version} OR version = 0`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
-      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
+      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version} OR version = 0`;
       connection.query(query, function (err: Error, picks: Pick[]) {
         if (err) throw console.error(err);
         let mergedResults = createPlayersPicks(
@@ -81,7 +80,6 @@ playerRoute.get(
           JSON.parse(JSON.stringify(picks))
         );
         res.send({ version: currentVersion, players: mergedResults });
-        console.log('hello');
       });
     });
   }
