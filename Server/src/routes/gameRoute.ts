@@ -71,12 +71,14 @@ gameRoute.get('/gameData/:year', async (req: Request, res: Response) => {
 });
 
 export const gameRouteDelta = express.Router();
-gameRoute.get('/gameData/delta/:year', (req: Request, res: Response) => {
+gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   var version = 0;
   if (!isEmpty(req.query.version)) {
     version = parseInt(req.query.version as string);
   }
-  let teamIdRange = getTeamIdRange(req.params['year']);
+  let year = req.params['year']
+  let currentVersion = await getCurrentVersion(year);
+  let teamIdRange = getTeamIdRange(year);
   let query = `SELECT * FROM bowlGames 
                     WHERE homeTeam > ${teamIdRange.lowerBound} 
                     AND homeTeam < ${teamIdRange.upperBound}
@@ -92,7 +94,7 @@ gameRoute.get('/gameData/delta/:year', (req: Request, res: Response) => {
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));
       let mergedResults = createBowlGames(bowlGames, bowlTeams);
-      res.send(mergedResults);
+      res.send( { version: currentVersion, bowlData: mergedResults });
     });
   });
 });
