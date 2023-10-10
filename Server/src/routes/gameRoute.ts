@@ -1,7 +1,7 @@
 import express, { Request, Response } from 'express';
 import { connection } from '../helpers/db';
 import { getTeamIdRange } from '../helpers/teamId';
-import _, { get, isEmpty } from 'lodash';
+import _, { isEmpty } from 'lodash';
 import { getCurrentVersion } from './versionUtil';
 
 export interface BowlGame {
@@ -66,17 +66,18 @@ gameRoute.get('/gameData/:year', async (req: Request, res: Response) => {
       });
     });
   } else {
-    res.send({ version: currentVersion });
+    res.send({ version: currentVersion, bowlData: [] });
   }
 });
 
 export const gameRouteDelta = express.Router();
 gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
-  var version = 0;
+  var version = -1;
   if (!isEmpty(req.query.version)) {
     version = parseInt(req.query.version as string);
+    version = version == 0 ? -1 : version;
   }
-  let year = req.params['year']
+  let year = req.params['year'];
   let currentVersion = await getCurrentVersion(year);
   let teamIdRange = getTeamIdRange(year);
   let query = `SELECT * FROM bowlGames 
@@ -94,7 +95,7 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));
       let mergedResults = createBowlGames(bowlGames, bowlTeams);
-      res.send( { version: currentVersion, bowlData: mergedResults });
+      res.send({ version: currentVersion, bowlData: mergedResults });
     });
   });
 });

@@ -1,7 +1,8 @@
 import express, { Request, Response } from 'express';
 import { connection } from '../helpers/db';
 import { getTeamIdRange } from '../helpers/teamId';
-import _ from 'lodash';
+import _, { isEmpty } from 'lodash';
+import { getCurrentVersion } from './versionUtil';
 
 export interface Pick {
   pickId: number;
@@ -31,20 +32,56 @@ export function createPlayersPicks(players: Player[], picks: Pick[]) {
 }
 
 export const playerRoute = express.Router();
-playerRoute.get('/playerData/:year', (req: Request, res: Response) => {
-  let playerIdRange = getTeamIdRange(req.params['year']);
-  let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
-  connection.query(query, function (err, players) {
-    if (err) throw console.error(err);
-    query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
-    connection.query(query, function (err, picks) {
+playerRoute.get('/playerData/:year', async (req: Request, res: Response) => {
+  var year = req.params['year'];
+  var version = 0;
+  if (!isEmpty(req.query.version)) {
+    version = parseInt(req.query.version as string);
+  }
+  let currentVersion = await getCurrentVersion(year);
+  if (version < currentVersion) {
+    let playerIdRange = getTeamIdRange(year);
+    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
+    connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
-      res.send(
-        createPlayersPicks(
+      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
+      connection.query(query, function (err: Error, picks: Pick[]) {
+        if (err) throw console.error(err);
+        let mergedResults = createPlayersPicks(
           JSON.parse(JSON.stringify(players)),
           JSON.parse(JSON.stringify(picks))
-        )
-      );
+        );
+        res.send({ version: currentVersion, players: mergedResults });
+      });
     });
-  });
+  } else {
+    res.send({ version: currentVersion, players: [] });
+  }
 });
+
+playerRoute.get(
+  '/playerData/delta/:year',
+  async (req: Request, res: Response) => {
+    var version = -1;
+    if (!isEmpty(req.query.version)) {
+      version = parseInt(req.query.version as string);
+      version = version == 0 ? -1 : version;
+    }
+    let year = req.params['year'];
+    let currentVersion = await getCurrentVersion(year);
+    let playerIdRange = getTeamIdRange(year);
+    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
+    connection.query(query, function (err: Error, players: Player[]) {
+      if (err) throw console.error(err);
+      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
+      connection.query(query, function (err: Error, picks: Pick[]) {
+        if (err) throw console.error(err);
+        let mergedResults = createPlayersPicks(
+          JSON.parse(JSON.stringify(players)),
+          JSON.parse(JSON.stringify(picks))
+        );
+        res.send({ version: currentVersion, players: mergedResults });
+      });
+    });
+  }
+);
