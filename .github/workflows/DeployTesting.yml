@@ -16,5 +16,7 @@ jobs:
     
     - name: docker-compose
       run: |
-       docker-compose up -d -no-deps --build
+       docker-compose down
+       docker-compose build --no-cache
+       docker-compose up -d
        docker system prune -f
