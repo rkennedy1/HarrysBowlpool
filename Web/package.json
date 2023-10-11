@@ -8,6 +8,7 @@
     "@emotion/styled": "^11.10.5",
     "@fontsource/roboto": "^4.5.8",
     "@mui/icons-material": "^5.14.8",
+    "@mui/material": "^5.14.13",
     "@mui/styled-engine-sc": "^5.14.8",
     "@mui/styles": "^5.14.9",
     "@testing-library/jest-dom": "^5.16.5",
