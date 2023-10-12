@@ -2,9 +2,7 @@ version: '3.6'
 
 services: 
   server:
-    build: 
-      context: ./Server
-      target: base
+    image: bowlpool_server:master
     env_file:
       - .env
     expose:
@@ -16,13 +14,10 @@ services:
   web:
     depends_on:
       - server
-    build: 
-      context: ./Web
-      target: baseweb
+    image: bowlpool_web:master
     env_file:
       - ./Web/.env
     expose:
       - "80"
     ports:
-      - "80:3000"
-    command: yarn start
+      - "80:80"

@@ -23,4 +23,5 @@ WORKDIR /usr/share/nginx/html
 RUN rm -rf ./*
 
 COPY --from=baseweb /home/node/app/build .
+EXPOSE 80
 ENTRYPOINT [ "nginx", "-g", "daemon off;" ]
