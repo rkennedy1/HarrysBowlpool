@@ -12,7 +12,7 @@ export class bowlpoolRepo {
       axios
         .get(`${this.url}/gameData/${year}`)
         .then((resp) => {
-          let data = resp.data;
+          let data = resp.data.bowlData;
           let sortedData = data.sort((a: BowlGame, b: BowlGame) => {
             return (
               new Date(a.startTime).valueOf() - new Date(b.startTime).valueOf()
@@ -29,7 +29,7 @@ export class bowlpoolRepo {
       axios
         .get(`${this.url}/playerData/${year}`)
         .then((resp) => {
-          let data = resp.data;
+          let data = resp.data.players;
           let sortedPlayers = data.sort(
             (a: Player, b: Player) => b.points - a.points
           );

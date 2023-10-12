@@ -19,8 +19,3 @@ EXPOSE 1313
 RUN yarn build
 
 COPY . .
-
-
-
-docker build -t bowlpool_web:master .
-docker build -t bowlpool_server:master .
