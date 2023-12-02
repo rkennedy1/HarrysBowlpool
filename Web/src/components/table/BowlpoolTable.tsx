@@ -13,6 +13,7 @@ const bpr = new bowlpoolRepo();
 interface bowlpoolTableProps {
   year: number;
   hideBowlData: boolean;
+  open: boolean;
 }
 
 export const BowlpoolTable: React.FC<bowlpoolTableProps> = (props) => {
@@ -29,6 +30,7 @@ export const BowlpoolTable: React.FC<bowlpoolTableProps> = (props) => {
       <BowlpoolTableHeader
         hideBowlData={props.hideBowlData}
         playerData={playerData}
+        open={props.open}
       />
       <BowlpoolTableBody
         hideBowlData={props.hideBowlData}

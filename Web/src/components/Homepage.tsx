@@ -64,7 +64,11 @@ export function Homepage() {
           </Tooltip>
         </Grid>
         <Grid item xs={12}>
-          <BowlpoolTable year={2022} hideBowlData={checked} />
+          <BowlpoolTable
+            year={2022}
+            hideBowlData={checked}
+            open={openSettings}
+          />
         </Grid>
         {/* <BowlpoolTabs hideBowlData={checked} /> */}
       </Grid>
