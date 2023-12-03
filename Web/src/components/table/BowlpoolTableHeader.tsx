@@ -13,12 +13,12 @@ export const BowlpoolTableHeader: React.FC<BowlpoolTableHeaderProps> = (
   props
 ) => {
   const [currentPlayer, setCurrentPlayer] = useState<string>(() => {
-    const saved = JSON.parse(localStorage.getItem('playerName') || '');
+    const saved = JSON.parse(localStorage.getItem('playerName') || '{}');
     return saved;
   });
 
   useEffect(() => {
-    setCurrentPlayer(JSON.parse(localStorage.getItem('playerName') || ''));
+    setCurrentPlayer(JSON.parse(localStorage.getItem('playerName') || '{}'));
   }, [props.open]);
 
   return (

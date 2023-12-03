@@ -55,10 +55,16 @@ export function Homepage() {
           </Tooltip>
         </Grid>
         <Grid item xs={4}>
-          <Tooltip title="Settings Modal">
+          <Tooltip title="Click to edit Settings">
             <FormControlLabel
               name="settingsModal"
-              control={<Button onClick={handleOpenSettings}>Settings</Button>}
+              control={
+                <SettingsModal
+                  open={openSettings}
+                  handleOpen={handleOpenSettings}
+                  handleClose={handleCloseSettings}
+                />
+              }
               label=""
             />
           </Tooltip>
@@ -72,11 +78,6 @@ export function Homepage() {
         </Grid>
         {/* <BowlpoolTabs hideBowlData={checked} /> */}
       </Grid>
-      <SettingsModal
-        open={openSettings}
-        handleOpen={handleOpenSettings}
-        handleClose={handleCloseSettings}
-      />
     </>
   );
 }

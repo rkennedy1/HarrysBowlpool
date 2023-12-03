@@ -50,7 +50,7 @@ export const SettingsModal: React.FC<settingsModalProps> = (props) => {
 
   return (
     <div>
-      <Button onClick={props.handleOpen}>Open modal</Button>
+      <Button onClick={props.handleOpen}>Settings</Button>
       <Modal
         open={props.open}
         onClose={props.handleClose}

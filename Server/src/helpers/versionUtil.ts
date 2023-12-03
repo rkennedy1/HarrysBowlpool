@@ -1,5 +1,5 @@
 import express, { Request, Response } from 'express';
-import { connection } from '../helpers/db';
+import { connection } from './db';
 
 interface version {
   currentVersion: number;
@@ -12,7 +12,8 @@ export async function getCurrentVersion(year: String): Promise<number> {
   return new Promise<number>((resolve, reject) => {
     connection.query(query, function (err: Error, returnVersion: version[]) {
       if (err) reject(err);
-      resolve(returnVersion[0].currentVersion);
+      if (returnVersion) resolve(returnVersion[0].currentVersion);
+      else 0;
     });
   });
 }
