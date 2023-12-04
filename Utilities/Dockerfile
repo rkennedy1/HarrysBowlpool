@@ -1,5 +1,5 @@
 # Dockerfile
 
-FROM  mysql:5.7.44 as sql
+FROM  mysql:8.2 as sql
 
 ADD dump.sql /docker-entrypoint-initdb.d
