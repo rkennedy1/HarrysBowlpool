@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { connection } from '../helpers/db';
 import { getTeamIdRange } from '../helpers/teamId';
 import _, { isEmpty } from 'lodash';
-import { getCurrentVersion } from './versionUtil';
+import { getCurrentVersion } from '../helpers/versionUtil';
 
 export interface BowlGame {
   gameId: number;
@@ -79,6 +79,7 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   }
   let year = req.params['year'];
   let currentVersion = await getCurrentVersion(year);
+
   let teamIdRange = getTeamIdRange(year);
   let query = `SELECT * FROM bowlGames 
                     WHERE homeTeam > ${teamIdRange.lowerBound} 

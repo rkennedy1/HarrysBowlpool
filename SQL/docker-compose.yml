@@ -14,9 +14,17 @@ services:
       - 3306:3306
     volumes:
       - ./init:/docker-entrypoint-initdb.d
+    networks:
+      - bowlpool
 
   adminer:
     image: adminer
     restart: always
     ports:
       - 8080:8080
+    networks:
+      - bowlpool
+
+networks:
+  bowlpool:
+    name: bowlpool

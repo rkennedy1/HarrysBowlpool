@@ -2,7 +2,7 @@ import express, { Request, Response } from 'express';
 import { connection } from '../helpers/db';
 import { getTeamIdRange } from '../helpers/teamId';
 import _, { isEmpty } from 'lodash';
-import { getCurrentVersion } from './versionUtil';
+import { getCurrentVersion } from '../helpers/versionUtil';
 
 export interface Pick {
   pickId: number;

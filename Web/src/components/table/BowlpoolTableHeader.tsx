@@ -1,16 +1,26 @@
 import 'bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Player } from '../../util/DataModels';
 
 interface BowlpoolTableHeaderProps {
   playerData: Player[];
   hideBowlData: boolean;
+  open: boolean;
 }
 
 export const BowlpoolTableHeader: React.FC<BowlpoolTableHeaderProps> = (
   props
 ) => {
+  const [currentPlayer, setCurrentPlayer] = useState<string>(() => {
+    const saved = JSON.parse(localStorage.getItem('playerName') || '{}');
+    return saved;
+  });
+
+  useEffect(() => {
+    setCurrentPlayer(JSON.parse(localStorage.getItem('playerName') || '{}'));
+  }, [props.open]);
+
   return (
     <thead>
       <tr>
@@ -33,7 +43,15 @@ export const BowlpoolTableHeader: React.FC<BowlpoolTableHeaderProps> = (
         {props.playerData !== undefined &&
           props.playerData.map((p, i) => {
             return (
-              <th key={i} className="sticky-top bg-light" id="header">
+              <th
+                key={i}
+                className={
+                  currentPlayer === p.name
+                    ? 'bg-warning sticky-top'
+                    : 'bg-light sticky-top'
+                }
+                id="header"
+              >
                 <div
                   data-toggle="tooltip"
                   data-placement="bottom"
