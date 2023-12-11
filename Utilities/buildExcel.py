@@ -2,6 +2,7 @@ from openpyxl import Workbook
 import cfbdAPI
 from datetime import datetime
 import pytz
+import sys
 
 
 # Establish the CFB API connection
@@ -23,7 +24,7 @@ def parseDate(date):
     return pst_date.strftime(dateFormat)
 
 
-def createFile():
+def createFile(fileName):
     wb = Workbook()
     ws = wb.active
 
@@ -36,14 +37,13 @@ def createFile():
         buildRow(ws, rowID, game, records)
         rowID += 2  # we add 2 since each game takes up 2 rows in excel
 
-    wb.save("resources/bowlpool-2023.xlsx")
+    wb.save(fileName)
 
 
 def buildHeader(sheet):
     sheet["A1"] = "Date / Bowl:"
     sheet["B1"] = "Teams:"
     sheet["C1"] = "Records:"
-    sheet["D1"] = "Line:"
 
 
 def buildRow(sheet, rowNumber, game, records):
@@ -55,9 +55,9 @@ def buildRow(sheet, rowNumber, game, records):
     sheet["C" + str(rowNumber + 1)] = getRecord(game.away_team, records)
 
 
-def main():
-    createFile()
+def main(args):
+    createFile(args[1])
 
 
 if __name__ == "__main__":
-    main()
+    main(sys.argv)
