@@ -24,7 +24,6 @@ def getRecord(team, records):
 
 
 def querySQL(query, values):
-    print(query, values)
     try:
         cursor.execute(query, values)
     except mysql.connector.Error as e:
