@@ -2,6 +2,8 @@ import cfbdAPI
 import sys
 from mysqlConnection import getMyDB
 import mysql.connector
+from datetime import datetime
+import pytz
 
 # Establish the database connection
 mydb = getMyDB()
@@ -10,6 +12,16 @@ cursor = mydb.cursor()
 
 # Establish the CFB API connection
 API = cfbdAPI.api
+
+
+def parseDate(date):
+    inputDateFormat = "%Y-%m-%dT%H:%M:%S.%fZ"
+    dateFormat = "%Y-%m-%d %I:%M:%S %p"
+    pst_timezone = pytz.timezone("America/Los_Angeles")
+    utc_date = datetime.strptime(date, inputDateFormat)
+    utc_date = pytz.utc.localize(utc_date)
+    pst_date = utc_date.astimezone(pst_timezone)
+    return pst_date.isoformat()
 
 
 def retrieveGameData(year):
@@ -33,8 +45,21 @@ def querySQL(query, values):
 
 
 def insertGame(game, year):
-    query = """INSERT INTO bowlGames (gameId, homeTeam, awayTeam, bowlName, year) VALUES (%s, %s, %s, %s, %s)"""
-    values = (game.id, game.home_id, game.away_id, game.notes, year)
+    query = """INSERT INTO bowlGames (gameId, homeTeam, awayTeam, bowlName, year, startTime) VALUES (%s, %s, %s, %s, %s, %s)"""
+    values = (
+        game.id,
+        game.home_id,
+        game.away_id,
+        game.notes,
+        year,
+        parseDate(game.start_date),
+    )
+    return querySQL(query, values)
+
+
+def insertVersion(year):
+    query = """INSERT INTO version (year, currentVersion) VALUES (%s, %s)"""
+    values = (year, 0)
     return querySQL(query, values)
 
 
@@ -81,7 +106,7 @@ def loadGames(gameData, year):
 def main(args):
     gameData = retrieveGameData(int(args[1]))
     successfulImports = loadGames(gameData, int(args[1]))
-
+    insertVersion(int(args[1]))
     # Close the database connection
     cursor.close()
     mydb.commit()
