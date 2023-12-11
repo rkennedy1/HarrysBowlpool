@@ -31,6 +31,7 @@ interface settingsModalProps {
   open: boolean;
   handleOpen: () => void;
   handleClose: () => void;
+  year: number;
 }
 
 export const SettingsModal: React.FC<settingsModalProps> = (props) => {
@@ -40,8 +41,8 @@ export const SettingsModal: React.FC<settingsModalProps> = (props) => {
     return saved;
   });
   useEffect(() => {
-    bpr.getPlayerData(2022).then((data: Player[]) => setPlayerData(data));
-  }, [2022]);
+    bpr.getPlayerData(props.year).then((data: Player[]) => setPlayerData(data));
+  }, [props.year]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setPlayerName(event.target.value as string);
