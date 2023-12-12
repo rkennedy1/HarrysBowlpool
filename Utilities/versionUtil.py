@@ -17,6 +17,7 @@ def getCurrentVersion(year):
     try:
         cursor.execute(query, values)
         result = cursor.fetchone()
+        print(result)
         version = result[0]
     except mysql.connector.Error as e:
         print("ERROR getting next version number from version table")
