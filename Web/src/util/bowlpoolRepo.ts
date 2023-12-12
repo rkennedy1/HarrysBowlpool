@@ -9,8 +9,7 @@ export class bowlpoolRepo {
 
   getGameData(year: number) {
     let localGameData = localStorage.getItem('gameData' + year.toString());
-    let localGameVersion =
-      localStorage.getItem('gameVersion' + year.toString()) ?? 0;
+    let localGameVersion = localStorage.getItem('gameVersion') ?? 0;
     let gameDataURL = localGameVersion
       ? `${this.url}/gameData/${year}?version=${localGameVersion}`
       : `${this.url}/gameData/${year}`;
@@ -32,7 +31,7 @@ export class bowlpoolRepo {
               'gameData' + year.toString(),
               JSON.stringify(sortedData)
             );
-            localStorage.setItem('gameVersion' + year.toString(), version);
+            localStorage.setItem('gameVersion', version);
             resolve(sortedData);
           } else if (localGameData) {
             resolve(JSON.parse(localGameData));
@@ -44,8 +43,7 @@ export class bowlpoolRepo {
 
   getPlayerData(year: number) {
     let localPlayerData = localStorage.getItem('playerData' + year.toString());
-    let localPlayerVersion =
-      localStorage.getItem('playerVersion' + year.toString()) ?? 0;
+    let localPlayerVersion = localStorage.getItem('playerVersion') ?? 0;
     let playerDataURL = localPlayerVersion
       ? `${this.url}/playerData/${year}?version=${localPlayerVersion}`
       : `${this.url}/playerData/${year}`;
@@ -64,7 +62,7 @@ export class bowlpoolRepo {
               'playerData' + year.toString(),
               JSON.stringify(sortedPlayers)
             );
-            localStorage.setItem('playerVersion' + year.toString(), version);
+            localStorage.setItem('playerVersion', version);
             resolve(sortedPlayers);
           } else if (localPlayerData) {
             resolve(JSON.parse(localPlayerData));

@@ -47,14 +47,18 @@ gameRoute.get('/gameData/:year', async (req: Request, res: Response) => {
   }
   let currentVersion = await getCurrentVersion(year);
 
-  if (version < currentVersion || version == 0) {
+  if (version < currentVersion) {
     let teamIdRange = getTeamIdRange(year);
-    let query = `SELECT * FROM bowlGames WHERE year = ${year}`;
+    let query = `SELECT * FROM bowlGames 
+                      WHERE homeTeam > ${teamIdRange.lowerBound} 
+                      AND homeTeam < ${teamIdRange.upperBound}`;
     let values = [];
     connection.query(query, function (err: Error, results: BowlGame[]) {
       if (err) throw console.error(err);
       let bowlGames = JSON.parse(JSON.stringify(results));
-      query = `SELECT * FROM bowlTeams WHERE year = ${year}`;
+      query = `SELECT * FROM bowlTeams 
+                  WHERE teamId > ${teamIdRange.lowerBound} 
+                  AND teamId < ${teamIdRange.upperBound}`;
       connection.query(query, function (err: Error, result: BowlTeam[]) {
         let bowlTeams = JSON.parse(JSON.stringify(result));
         let mergedResults = createBowlGames(bowlGames, bowlTeams);
@@ -77,13 +81,17 @@ gameRoute.get('/gameData/delta/:year', async (req: Request, res: Response) => {
   let currentVersion = await getCurrentVersion(year);
 
   let teamIdRange = getTeamIdRange(year);
-  let query = `SELECT * FROM bowlGames WHERE year = ${year}
+  let query = `SELECT * FROM bowlGames 
+                    WHERE homeTeam > ${teamIdRange.lowerBound} 
+                    AND homeTeam < ${teamIdRange.upperBound}
                     AND version > ${version}`;
   let values = [];
   connection.query(query, function (err: Error, results: BowlGame[]) {
     if (err) throw console.error(err);
     let bowlGames = JSON.parse(JSON.stringify(results));
-    query = `SELECT * FROM bowlTeams WHERE year = ${year}
+    query = `SELECT * FROM bowlTeams 
+                WHERE teamId > ${teamIdRange.lowerBound} 
+                AND teamId < ${teamIdRange.upperBound}
                 AND version > ${version}`;
     connection.query(query, function (err: Error, result: BowlTeam[]) {
       let bowlTeams = JSON.parse(JSON.stringify(result));

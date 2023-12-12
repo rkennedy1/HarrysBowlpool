@@ -4,7 +4,7 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import { useState } from 'react';
-import { BowlpoolTable } from './table/BowlpoolTable';
+import { BowlpoolTable } from '../table/BowlpoolTable';
 
 function TabPanel(props) {
   const { children, value, index, ...other } = props;
