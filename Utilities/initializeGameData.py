@@ -16,7 +16,6 @@ API = cfbdAPI.api
 
 def parseDate(date):
     inputDateFormat = "%Y-%m-%dT%H:%M:%S.%fZ"
-    dateFormat = "%Y-%m-%d %I:%M:%S %p"
     pst_timezone = pytz.timezone("America/Los_Angeles")
     utc_date = datetime.strptime(date, inputDateFormat)
     utc_date = pytz.utc.localize(utc_date)
@@ -45,7 +44,7 @@ def querySQL(query, values):
 
 
 def insertGame(game, year):
-    query = """INSERT INTO bowlGames (gameId, homeTeam, awayTeam, bowlName, year, startTime) VALUES (%s, %s, %s, %s, %s, %s)"""
+    query = """INSERT INTO bowlGames (gameId, homeTeam, awayTeam, bowlName, year, startTime, version) VALUES (%s, %s, %s, %s, %s, %s, %s)"""
     values = (
         game.id,
         game.home_id,
@@ -53,18 +52,19 @@ def insertGame(game, year):
         game.notes,
         year,
         parseDate(game.start_date),
+        1
     )
     return querySQL(query, values)
 
 
 def insertVersion(year):
     query = """INSERT INTO version (year, currentVersion) VALUES (%s, %s)"""
-    values = (year, 0)
+    values = (year, 1)
     return querySQL(query, values)
 
 
 def insertTeam(game, year, isHome, records):
-    query = """INSERT INTO bowlTeams (teamId, bowlId, year, name, isHome, line, record, conference) VALUES (%s, %s, %s, %s, %s, %s, %s, %s)"""
+    query = """INSERT INTO bowlTeams (teamId, bowlId, year, name, isHome, line, record, conference, version) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)"""
     values = ()
     if isHome:
         values = (
@@ -76,6 +76,7 @@ def insertTeam(game, year, isHome, records):
             0,
             getRecord(game.home_team, records),
             game.home_conference,
+            1
         )
     else:
         values = (
@@ -87,6 +88,7 @@ def insertTeam(game, year, isHome, records):
             0,
             getRecord(game.away_team, records),
             game.away_conference,
+            1
         )
     return querySQL(query, values)
 
@@ -104,9 +106,10 @@ def loadGames(gameData, year):
 
 
 def main(args):
-    gameData = retrieveGameData(int(args[1]))
-    successfulImports = loadGames(gameData, int(args[1]))
-    insertVersion(int(args[1]))
+    year = int(args[1])
+    gameData = retrieveGameData(year)
+    successfulImports = loadGames(gameData, year)
+    insertVersion(year)
     # Close the database connection
     cursor.close()
     mydb.commit()
