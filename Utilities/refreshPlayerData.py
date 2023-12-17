@@ -27,9 +27,9 @@ def didHomeTeamWin(homeTeam, awayTeam):
     return False
 
 
-def updatePlayerScore(playerId, points, version):
-    query = """UPDATE players SET points=%s, version=%s WHERE playerId=%s"""
-    values = (points, version, playerId)
+def updatePlayerScore(name, year, points, version):
+    query = """UPDATE players SET points=%s, version=%s WHERE name=%s and year = %s"""
+    values = (points, version, name, year)
     try:
         cursor.execute(query, values)
         return 1
@@ -45,20 +45,23 @@ def refreshAllPlayerData(year):
     newScores = [0] * len(players)
 
     for game in games:
-        homeTeam = getTeamFromDatabase(game[2])
-        awayTeam = getTeamFromDatabase(game[3])
-        if homeTeam[0][-1] is not None and awayTeam[0][-1] is not None:
+        homeTeam = getTeamFromDatabase(game[3])
+        awayTeam = getTeamFromDatabase(game[4])
+        print(homeTeam[0][-2], awayTeam[0][-2])
+        if homeTeam[0][-2] != 0 and awayTeam[0][-2] != 0:
             homeWin = didHomeTeamWin(homeTeam, awayTeam)
             for idx, player in enumerate(players):
                 for pick in player[-1]:
-                    if pick[2] == game[0] and (
-                        (homeWin and pick[3]) or (not homeWin and not pick[3])
-                    ):
-                        newScores[idx] += 1
+                    if pick[2] == game[1] and homeWin:
+                        if pick[3] == game[3]:
+                            newScores[idx] += 1
+                    elif pick[2] == game[1]:
+                        if pick[3] == game[4]:
+                            newScores[idx] += 1
     playerUpdates = 0
     for idx, player in enumerate(players):
         if player[2] != newScores[idx]:
-            playerUpdates += updatePlayerScore(player[0], newScores[idx], version)
+            playerUpdates += updatePlayerScore(player[1], year, newScores[idx], version)
     if playerUpdates > 0:
         incrementVersion(year)
         printStats(playerUpdates, year, version)
@@ -75,9 +78,9 @@ def printStats(playerUpdates, year, version):
     print("-------------------------------")
 
 
-def getPicksForPlayerFromDatabase(playerId):
-    query = """SELECT * FROM playerPicks WHERE playerId = %s"""
-    values = [playerId]
+def getPicksForPlayerFromDatabase(player):
+    query = """SELECT * FROM playerPicks WHERE player = %s"""
+    values = [player]
     try:
         cursor.execute(query, values)
         return cursor.fetchall()
@@ -88,8 +91,8 @@ def getPicksForPlayerFromDatabase(playerId):
 
 
 def getPlayersFromDatabase(year):
-    query = """SELECT * FROM players WHERE playerId > %s AND playerId < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
+    query = """SELECT * FROM players WHERE year = %s"""
+    values = [year]
     try:
         cursor.execute(query, values)
         players = cursor.fetchall()
@@ -97,7 +100,7 @@ def getPlayersFromDatabase(year):
         for player in players:
             result.append(list(player))
             # result[-1:][0][2] = 0
-            result[-1:][0].append(getPicksForPlayerFromDatabase(result[-1:][0][0]))
+            result[-1:][0].append(getPicksForPlayerFromDatabase(result[-1:][0][1]))
         return result
 
     except mysql.connector.Error as e:
@@ -119,8 +122,8 @@ def getTeamFromDatabase(teamId):
 
 
 def getGamesFromDatabase(year):
-    query = """SELECT * FROM bowlGames WHERE homeTeam > %s AND homeTeam < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
+    query = """SELECT * FROM bowlGames WHERE year = %s"""
+    values = [year]
     try:
         cursor.execute(query, values)
         games = cursor.fetchall()

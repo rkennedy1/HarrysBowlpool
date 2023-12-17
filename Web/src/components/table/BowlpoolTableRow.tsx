@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { BowlpoolTableHomeRow } from './BowlpoolTableHomeRow';
 import { BowlpoolTableAwayRow } from './BowlpoolTableAwayRow';
 import { BowlGame, Player } from '../../util/DataModels';
+import { useActionData } from 'react-router-dom';
 
 function convertLine(line: string): number {
   if (line.length > 1) {
@@ -15,17 +16,22 @@ function convertLine(line: string): number {
   return 0;
 }
 
-function checkIfHomeWon(game: BowlGame) {
+function checkIfWon(game: BowlGame, isHome: boolean) {
   let homeTeamLine = convertLine(game.homeTeam.line)
     ? convertLine(game.homeTeam.line)
     : 0;
   let awayTeamLine = convertLine(game.awayTeam.line)
     ? convertLine(game.awayTeam.line)
     : 0;
+  let convertedHomeScore = game.homeTeam.score + homeTeamLine;
+  let convertedAwayScore = game.awayTeam.score + awayTeamLine;
   if (game.homeTeam.score !== null && game.awayTeam.score !== null) {
-    return (
-      game.homeTeam.score + homeTeamLine > game.awayTeam.score + awayTeamLine
-    );
+    if (convertedHomeScore === convertedAwayScore) return true;
+    if (isHome) {
+      return convertedHomeScore > convertedAwayScore;
+    } else {
+      return convertedAwayScore > convertedHomeScore;
+    }
   } else {
     return false;
   }
@@ -43,14 +49,18 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
       <BowlpoolTableHomeRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={checkIfHomeWon(props.gameData)}
+        didWin={checkIfWon(props.gameData, true)}
+        unPlayed={new Date(props.gameData.startTime) > new Date()}
         hideBowlData={props.hideBowlData}
+        teamId={props.gameData.homeTeam.teamId}
       />
       <BowlpoolTableAwayRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={!checkIfHomeWon(props.gameData)}
+        didWin={checkIfWon(props.gameData, false)}
+        unPlayed={new Date(props.gameData.startTime) > new Date()}
         hideBowlData={props.hideBowlData}
+        teamId={props.gameData.homeTeam.teamId}
       />
       <tr>
         <td>

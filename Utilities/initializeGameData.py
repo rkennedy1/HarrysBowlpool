@@ -20,7 +20,9 @@ def parseDate(date):
     utc_date = datetime.strptime(date, inputDateFormat)
     utc_date = pytz.utc.localize(utc_date)
     pst_date = utc_date.astimezone(pst_timezone)
-    return pst_date.isoformat()
+    print("utc: ", utc_date)
+    print("pst: ", pst_date.isoformat())
+    return pst_date
 
 
 def retrieveGameData(year):
@@ -52,7 +54,7 @@ def insertGame(game, year):
         game.notes,
         year,
         parseDate(game.start_date),
-        1
+        1,
     )
     return querySQL(query, values)
 
@@ -76,7 +78,7 @@ def insertTeam(game, year, isHome, records):
             0,
             getRecord(game.home_team, records),
             game.home_conference,
-            1
+            1,
         )
     else:
         values = (
@@ -88,7 +90,7 @@ def insertTeam(game, year, isHome, records):
             0,
             getRecord(game.away_team, records),
             game.away_conference,
-            1
+            1,
         )
     return querySQL(query, values)
 

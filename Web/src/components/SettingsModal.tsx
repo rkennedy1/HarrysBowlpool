@@ -40,7 +40,7 @@ export const SettingsModal: React.FC<settingsModalProps> = (props) => {
     return saved;
   });
   useEffect(() => {
-    bpr.getPlayerData(2022).then((data: Player[]) => setPlayerData(data));
+    bpr.getPlayerData(2023).then((data: Player[]) => setPlayerData(data));
   }, [2022]);
 
   const handleChange = (event: SelectChangeEvent) => {
