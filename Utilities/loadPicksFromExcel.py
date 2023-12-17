@@ -41,7 +41,7 @@ def insertPlayers(sheet):
         id = generateId(2023, 9)
         players.append({"name": name, "id": id, "column": col})
         values = (id, name, 2023)
-        # querySQL(query, values)
+        querySQL(query, values)
     return players
 
 
