@@ -3,15 +3,17 @@ import { createPlayersPicks, Pick, Player } from '../../routes/playerRoute';
 let picks: Pick[] = [
   {
     pickId: 2021133529751,
-    playerId: 202135697,
+    player: 'MSK',
     gameId: 401331231,
-    isHome: true
+    teamId: 123,
+    year: 2023
   },
   {
     pickId: 2021967618644,
-    playerId: 202118056,
+    player: 'JMK',
     gameId: 401331221,
-    isHome: false
+    teamId: 23,
+    year: 2023
   }
 ];
 let players: Player[] = [
@@ -27,10 +29,11 @@ let playerPickResult: Player[] = [
     year: '2021',
     picks: [
       {
-        pickId: 2021133529751,
-        playerId: 202135697,
-        gameId: 401331231,
-        isHome: true
+        pickId: 2021967618644,
+        player: 'JMK',
+        gameId: 401331221,
+        teamId: 23,
+        year: 2023
       }
     ]
   },
@@ -41,10 +44,11 @@ let playerPickResult: Player[] = [
     year: '2021',
     picks: [
       {
-        pickId: 2021967618644,
-        playerId: 202118056,
-        gameId: 401331221,
-        isHome: false
+        pickId: 2021133529751,
+        player: 'JMK',
+        gameId: 401331231,
+        teamId: 123,
+        year: 2023
       }
     ]
   }
@@ -53,6 +57,6 @@ test('should return a list with the picks inserted in the players objects', () =
   expect(createPlayersPicks(players, picks) == playerPickResult);
 });
 
-test("should return null set as pick playerId dpes mpt match player's playerId", () => {
+test("should return null set as pick playerId does not match player's playerId", () => {
   expect(createPlayersPicks([players[0]], [picks[0]]) == null);
 });
