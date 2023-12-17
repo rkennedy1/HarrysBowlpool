@@ -21,6 +21,7 @@ export interface Player {
 }
 
 export function isPlayersPick(pick: Pick, player: Player) {
+  console.log(pick.player, player.name);
   return pick.player == player.name;
 }
 
@@ -41,7 +42,6 @@ playerRoute.get('/playerData/:year', async (req: Request, res: Response) => {
   }
   let currentVersion = await getCurrentVersion(year);
   if (version < currentVersion) {
-    let playerIdRange = getTeamIdRange(year);
     let query = `SELECT * FROM players WHERE year = ${year}`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
@@ -70,7 +70,6 @@ playerRoute.get(
     }
     let year = req.params['year'];
     let currentVersion = await getCurrentVersion(year);
-    let playerIdRange = getTeamIdRange(year);
     let query = `SELECT * FROM players WHERE year = ${year} AND version > ${version}`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
