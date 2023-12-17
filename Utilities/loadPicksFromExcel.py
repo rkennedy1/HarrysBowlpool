@@ -23,7 +23,6 @@ def querySQL(query, values):
 def insertLine(line, teamId):
     query = """UPDATE bowlTeams SET line = %s WHERE teamId = %s;"""
     values = (line, teamId)
-    print(query, values)
     querySQL(query, values)
 
 
@@ -69,26 +68,20 @@ def parse_excel(file_path):
 
         for row in range(2, row_count, 2):
             bowlId = sheet.cell(row=row + 1, column=1).value
-            # top = {
-            #     "teamId": sheet.cell(row=row, column=2).value,
-            #     "line": sheet.cell(row=row, column=5).value,
-            # }
-            # bottom = {
-            #     "teamId": sheet.cell(row=row + 1, column=2).value,
-            #     "line": sheet.cell(row=row + 1, column=5).value,
-            # }
-            # if top.line:
-            #     insertLine(top.line, top.teamId)
-            # if bottom.line:
-            #     insertLine(bottom.line, bottom.teamId)
+            top = {
+                "teamId": sheet.cell(row=row, column=2).value,
+                "line": sheet.cell(row=row, column=5).value,
+            }
+            bottom = {
+                "teamId": sheet.cell(row=row + 1, column=2).value,
+                "line": sheet.cell(row=row + 1, column=5).value,
+            }
+            if top["line"]:
+                insertLine(top["line"], top["teamId"])
+            if bottom["line"]:
+                insertLine(bottom["line"], bottom["teamId"])
             insertPlayerPicksForRow(players, sheet, row, bowlId)
             insertPlayerPicksForRow(players, sheet, row + 1, bowlId)
-
-            # Example: Print the values of the first column for every two lines
-            # print(f"Line {row}: {cell_value_1}")
-            # print(f"Line {row + 1}: {cell_value_2}")
-
-            # Add your processing logic here
 
     except Exception as e:
         print(f"Error: {e}")
