@@ -9,7 +9,7 @@ export interface Pick {
   pickId: number;
   player: string;
   gameId: number;
-  teamId: string;
+  teamId: number;
 }
 
 export interface Player {
