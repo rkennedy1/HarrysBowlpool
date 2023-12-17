@@ -22,8 +22,10 @@ def convertLine(team):
 def didHomeTeamWin(homeTeam, awayTeam):
     hLine = convertLine(homeTeam)
     aLine = convertLine(awayTeam)
-    if homeTeam[0][-1] or awayTeam[0][-1]:
-        return float(homeTeam[0][-1]) + hLine > float(awayTeam[0][-1]) + aLine
+    if homeTeam[0][-2] or awayTeam[0][-2]:
+        if float(homeTeam[0][-2]) + hLine == float(awayTeam[0][-2]) + aLine:
+            return True
+        return float(homeTeam[0][-2]) + hLine > float(awayTeam[0][-2]) + aLine
     return False
 
 
@@ -52,11 +54,10 @@ def refreshAllPlayerData(year):
             homeWin = didHomeTeamWin(homeTeam, awayTeam)
             for idx, player in enumerate(players):
                 for pick in player[-1]:
-                    if pick[2] == game[1] and homeWin:
-                        if pick[3] == game[3]:
+                    if pick[2] == game[1]:
+                        if pick[3] == game[3] and didHomeTeamWin(homeTeam, awayTeam):
                             newScores[idx] += 1
-                    elif pick[2] == game[1]:
-                        if pick[3] == game[4]:
+                        elif pick[3] == game[4] and didHomeTeamWin(awayTeam, homeTeam):
                             newScores[idx] += 1
     playerUpdates = 0
     for idx, player in enumerate(players):
