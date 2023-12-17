@@ -7,13 +7,15 @@ interface BowlpoolTableHomeRowProps {
   hideBowlData: boolean;
   game: BowlGame;
   playerData: Player[];
+  unPlayed: boolean;
+  teamId: number;
 }
 
 export const BowlpoolTableHomeRow: React.FC<BowlpoolTableHomeRowProps> = (
   props
 ) => {
   return (
-    <tr className={props.didWin ? 'table-success' : ''}>
+    <tr className={props.didWin && !props.unPlayed ? 'table-success' : ''}>
       {!props.hideBowlData && <th scope="row">{props.game.bowlName} Bowl</th>}
       <th scope="row">Home: {props.game.homeTeam.name}</th>
       {!props.hideBowlData && <th>{props.game.homeTeam.record}</th>}
@@ -30,8 +32,13 @@ export const BowlpoolTableHomeRow: React.FC<BowlpoolTableHomeRowProps> = (
         props.playerData.map((player, j) => {
           return player.picks.map((pick, q) => {
             if (pick.gameId === props.game.gameId) {
-              return pick.isHome ? (
-                <BowlpoolTableCell key={q} didWin={props.didWin} id={''} />
+              return pick.teamId === props.teamId ? (
+                <BowlpoolTableCell
+                  key={q}
+                  didWin={props.didWin}
+                  id={''}
+                  unPlayed={props.unPlayed}
+                />
               ) : (
                 <td key={q}></td>
               );

@@ -8,13 +8,17 @@ interface BowlpoolTableAwayRowProps {
   playerData: Player[];
   didWin: boolean;
   hideBowlData: boolean;
+  unPlayed: boolean;
+  teamId: number;
 }
 
 export const BowlpoolTableAwayRow: React.FC<BowlpoolTableAwayRowProps> = (
   props
 ) => {
   return (
-    <tr className={props.didWin ? 'table-success' : 'bg-light'}>
+    <tr
+      className={props.didWin && !props.unPlayed ? 'table-success' : 'bg-light'}
+    >
       {!props.hideBowlData && (
         <th scope="row" id="away">
           {moment(
@@ -41,10 +45,15 @@ export const BowlpoolTableAwayRow: React.FC<BowlpoolTableAwayRowProps> = (
         props.playerData.map((player, j) =>
           player.picks.map((pick, q) => {
             if (pick.gameId === props.game.gameId) {
-              return !pick.isHome ? (
-                <BowlpoolTableCell key={q} didWin={props.didWin} id="away" />
-              ) : (
+              return pick.teamId === props.teamId ? (
                 <td key={q} id="away"></td>
+              ) : (
+                <BowlpoolTableCell
+                  key={q}
+                  didWin={props.didWin}
+                  id="away"
+                  unPlayed={props.unPlayed}
+                />
               );
             } else {
               return '';

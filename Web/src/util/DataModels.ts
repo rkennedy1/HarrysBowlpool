@@ -1,5 +1,5 @@
 export type BowlGame = {
-  gameId: string;
+  gameId: number;
   bowlName: string;
   startTime: Date;
   homeTeam: BowlTeam;
@@ -7,6 +7,7 @@ export type BowlGame = {
 };
 
 export type BowlTeam = {
+  teamId: number;
   name: string;
   line: string;
   score: number;
@@ -19,9 +20,13 @@ export type Player = {
   points: number;
   year: number;
   picks: Pick[];
+  version: number;
 };
 
 export type Pick = {
-  gameId: string;
-  isHome: boolean;
+  year: number;
+  player: string;
+  gameId: number;
+  teamId: number;
+  version: number;
 };

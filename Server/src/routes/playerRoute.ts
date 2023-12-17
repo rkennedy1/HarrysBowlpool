@@ -5,10 +5,11 @@ import _, { isEmpty } from 'lodash';
 import { getCurrentVersion } from '../helpers/versionUtil';
 
 export interface Pick {
+  year: number;
   pickId: number;
-  playerId: number;
+  player: string;
   gameId: number;
-  isHome: boolean;
+  teamId: string;
 }
 
 export interface Player {
@@ -20,7 +21,7 @@ export interface Player {
 }
 
 export function isPlayersPick(pick: Pick, player: Player) {
-  return pick.playerId == player.playerId;
+  return pick.player == player.name;
 }
 
 export function createPlayersPicks(players: Player[], picks: Pick[]) {
@@ -41,10 +42,10 @@ playerRoute.get('/playerData/:year', async (req: Request, res: Response) => {
   let currentVersion = await getCurrentVersion(year);
   if (version < currentVersion) {
     let playerIdRange = getTeamIdRange(year);
-    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
+    let query = `SELECT * FROM players WHERE year = ${year}`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
-      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound}`;
+      query = `SELECT * FROM playerPicks WHERE year = ${year}`;
       connection.query(query, function (err: Error, picks: Pick[]) {
         if (err) throw console.error(err);
         let mergedResults = createPlayersPicks(
@@ -70,10 +71,10 @@ playerRoute.get(
     let year = req.params['year'];
     let currentVersion = await getCurrentVersion(year);
     let playerIdRange = getTeamIdRange(year);
-    let query = `SELECT * FROM players WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
+    let query = `SELECT * FROM players WHERE year = ${year} AND version > ${version}`;
     connection.query(query, function (err: Error, players: Player[]) {
       if (err) throw console.error(err);
-      query = `SELECT * FROM playerPicks WHERE playerId > ${playerIdRange.lowerBound} AND playerId < ${playerIdRange.upperBound} AND version > ${version}`;
+      query = `SELECT * FROM playerPicks WHERE year = ${year} AND version > ${version}`;
       connection.query(query, function (err: Error, picks: Pick[]) {
         if (err) throw console.error(err);
         let mergedResults = createPlayersPicks(

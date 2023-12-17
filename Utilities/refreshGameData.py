@@ -4,6 +4,7 @@ import mysql.connector
 from datetime import datetime
 import sys
 from versionUtil import getCurrentVersion, incrementVersion
+import pickle
 
 # Establish the CFB API connection
 API = cfbdAPI.api
@@ -37,14 +38,15 @@ def updateGame(gameAPI, gameDB, version):
 def updateTeam(gameAPI, gameDB, isHome, version):
     conference, teamId = "", ""
     scores = []
+    print(gameDB)
     if isHome:
         conference = gameAPI.home_conference
         scores = gameAPI.home_line_scores
-        teamId = gameDB[2]
+        teamId = gameDB[3]
     else:
         conference = gameAPI.away_conference
         scores = gameAPI.away_line_scores
-        teamId = gameDB[3]
+        teamId = gameDB[4]
     if scores:
         # get the current score in order to see if it has changed
         currentScore = getCurrentScore(teamId)
@@ -128,11 +130,11 @@ def getNextVersion(year):
 def refreshAllGameData(year):
     version = getCurrentVersion(year) + 1
     gamesDB = getGamesFromDatabase(year)
-    gamesAPI = API.get_games(year=year, season_type="postseason")
+    gamesAPI = API.get_games(year=year, season_type="postseason", division="fbs")
     gameUpdates, teamUpdates = 0, 0
     for gameAPI in gamesAPI:
         for gameDB in gamesDB:
-            if gameAPI.id == gameDB[0]:
+            if gameAPI.id == gameDB[1]:
                 changed = False
                 if updateTeam(gameAPI, gameDB, True, version):
                     teamUpdates += 1
@@ -174,8 +176,8 @@ def getTeamFromDatabase(teamId):
 
 
 def getGamesFromDatabase(year):
-    query = """SELECT * FROM bowlGames WHERE homeTeam > %s AND homeTeam < %s"""
-    values = (int(str(year) + "00000"), int(str(int(year + 1)) + "00000"))
+    query = """SELECT * FROM bowlGames WHERE year = %s"""
+    values = [year]
     try:
         cursor.execute(query, values)
         return cursor.fetchall()
