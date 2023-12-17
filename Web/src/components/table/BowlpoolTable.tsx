@@ -40,6 +40,7 @@ export const BowlpoolTable: React.FC<bowlpoolTableProps> = (props) => {
       <BowlpoolTableFooter
         hideBowlData={props.hideBowlData}
         playerData={playerData}
+        open={props.open}
       />
     </table>
   );
