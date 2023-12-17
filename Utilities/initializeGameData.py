@@ -53,7 +53,7 @@ def insertGame(game, year):
         game.away_id,
         game.notes,
         year,
-        parseDate(game.start_date),
+        datetime.strptime(game.start_date, "%Y-%m-%dT%H:%M:%S.%fZ").isoformat(),
         1,
     )
     return querySQL(query, values)
