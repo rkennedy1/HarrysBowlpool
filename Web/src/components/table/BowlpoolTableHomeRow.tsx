@@ -20,7 +20,7 @@ export const BowlpoolTableHomeRow: React.FC<BowlpoolTableHomeRowProps> = (
       <th scope="row">Home: {props.game.homeTeam.name}</th>
       {!props.hideBowlData && <th>{props.game.homeTeam.record}</th>}
       <th>
-        {props.game.homeTeam.line
+        {props.game.homeTeam.line && props.game.homeTeam.line !== '0'
           ? props.game.homeTeam.score || props.game.awayTeam.score
             ? `${props.game.homeTeam.score} (${props.game.homeTeam.line})`
             : `N/A (${props.game.homeTeam.line})`
