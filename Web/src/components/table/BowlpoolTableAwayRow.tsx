@@ -33,7 +33,7 @@ export const BowlpoolTableAwayRow: React.FC<BowlpoolTableAwayRowProps> = (
       </th>
       {!props.hideBowlData && <th id="away">{props.game.awayTeam.record}</th>}
       <th id="away">
-        {props.game.awayTeam.line
+        {props.game.awayTeam.line && props.game.awayTeam.line !== '0'
           ? props.game.awayTeam.score || props.game.homeTeam.score
             ? `${props.game.awayTeam.score} (${props.game.awayTeam.line})`
             : `N/A (${props.game.awayTeam.line})`
