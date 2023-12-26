@@ -144,7 +144,7 @@ def refreshAllGameData(year):
                     teamUpdates += 1
                     changed = True
                 # Only update game when data is changed
-                if changed:
+                # if changed:
                     gameUpdates += updateGame(gameAPI, gameDB, version)
 
     if teamUpdates > 0:
