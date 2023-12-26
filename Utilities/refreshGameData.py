@@ -19,12 +19,13 @@ cursor = mydb.cursor()
 def updateGame(gameAPI, gameDB, version):
     # Select the data and update if data has changed
     # Include version number in the update
-    query = """UPDATE bowlGames SET startTime=%s, version=%s WHERE gameId=%s"""
+    query = """UPDATE bowlGames SET startTime=%s, completed=%s, version=%s WHERE gameId=%s"""
     time = (datetime.strptime(gameAPI.start_date, "%Y-%m-%dT%H:%M:%S.%fZ")).strftime(
         "%Y-%m-%d %H:%M:%S"
     )
+    completed = gameAPI.completed
     gameId = gameDB[0]
-    values = (time, version, gameId)
+    values = (time, completed, version, gameId)
     try:
         cursor.execute(query, values)
         return 1
