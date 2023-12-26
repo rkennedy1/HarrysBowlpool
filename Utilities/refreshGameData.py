@@ -47,7 +47,7 @@ def updateTeam(gameAPI, gameDB, isHome, version):
         conference = gameAPI.away_conference
         scores = gameAPI.away_line_scores
         teamId = gameDB[4]
-    if scores:
+    if gameAPI.completed:
         # get the current score in order to see if it has changed
         currentScore = getCurrentScore(teamId)
         newScore = sum(scores)
