@@ -4,6 +4,7 @@ export type BowlGame = {
   startTime: Date;
   homeTeam: BowlTeam;
   awayTeam: BowlTeam;
+  completed: boolean;
 };
 
 export type BowlTeam = {

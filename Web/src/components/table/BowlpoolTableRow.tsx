@@ -1,8 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { BowlpoolTableHomeRow } from './BowlpoolTableHomeRow';
 import { BowlpoolTableAwayRow } from './BowlpoolTableAwayRow';
 import { BowlGame, Player } from '../../util/DataModels';
-import { useActionData } from 'react-router-dom';
 
 function convertLine(line: string): number {
   if (line.length > 1) {
@@ -49,7 +48,7 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
       <BowlpoolTableHomeRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={checkIfWon(props.gameData, true)}
+        didWin={checkIfWon(props.gameData, true) && props.gameData.completed}
         unPlayed={new Date(props.gameData.startTime) > new Date()}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
@@ -57,7 +56,7 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
       <BowlpoolTableAwayRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={checkIfWon(props.gameData, false)}
+        didWin={checkIfWon(props.gameData, false) && props.gameData.completed}
         unPlayed={new Date(props.gameData.startTime) > new Date()}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
