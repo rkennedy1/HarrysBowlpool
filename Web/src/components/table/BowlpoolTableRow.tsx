@@ -49,7 +49,7 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
         game={props.gameData}
         playerData={props.playerData}
         didWin={checkIfWon(props.gameData, true)}
-        unPlayed={props.gameData.completed}
+        unPlayed={!props.gameData.completed}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
       />
@@ -57,7 +57,7 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
         game={props.gameData}
         playerData={props.playerData}
         didWin={checkIfWon(props.gameData, false)}
-        unPlayed={props.gameData.completed}
+        unPlayed={!props.gameData.completed}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
       />
