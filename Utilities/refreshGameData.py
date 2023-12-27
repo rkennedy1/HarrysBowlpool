@@ -39,15 +39,14 @@ def updateGame(gameAPI, gameDB, version):
 def updateTeam(gameAPI, gameDB, isHome, version):
     conference, teamId = "", ""
     scores = []
-    print(gameDB)
     if isHome:
         conference = gameAPI.home_conference
         scores = gameAPI.home_line_scores
-        teamId = gameDB[3]
+        teamId = gameDB[1]
     else:
         conference = gameAPI.away_conference
         scores = gameAPI.away_line_scores
-        teamId = gameDB[4]
+        teamId = gameDB[2]
     if gameAPI.completed:
         # get the current score in order to see if it has changed
         currentScore = getCurrentScore(teamId)
@@ -135,7 +134,7 @@ def refreshAllGameData(year):
     gameUpdates, teamUpdates = 0, 0
     for gameAPI in gamesAPI:
         for gameDB in gamesDB:
-            if gameAPI.id == gameDB[1]:
+            if gameAPI.id == gameDB[0]:
                 changed = False
                 if updateTeam(gameAPI, gameDB, True, version):
                     teamUpdates += 1
@@ -144,8 +143,8 @@ def refreshAllGameData(year):
                     teamUpdates += 1
                     changed = True
                     # Only update game when data is changed
-                    # if changed:
-                gameUpdates += updateGame(gameAPI, gameDB, version)
+                if changed:
+                    gameUpdates += updateGame(gameAPI, gameDB, version)
 
     if teamUpdates > 0:
         incrementVersion(year)
@@ -163,21 +162,8 @@ def printStats(gameUpdates, teamUpdates, year, version):
     print("-------------------------------")
 
 
-def getTeamFromDatabase(teamId):
-    query = """SELECT * FROM bowlTeams WHERE teamId=%s """
-    values = teamId
-    try:
-        cursor.execute(query, values)
-        return cursor.fetchall()
-
-    except mysql.connector.Error as e:
-        print("ERROR getting teams fro bowl teams")
-        print(e)
-        return []
-
-
 def getGamesFromDatabase(year):
-    query = """SELECT * FROM bowlGames WHERE year = %s"""
+    query = """SELECT gameId, homeTeam, awayTeam  FROM bowlGames WHERE year = %s"""
     values = [year]
     try:
         cursor.execute(query, values)

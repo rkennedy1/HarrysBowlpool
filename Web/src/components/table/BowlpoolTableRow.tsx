@@ -48,16 +48,16 @@ export const BowlpoolTableRow: React.FC<BowlpoolTableRowProps> = (props) => {
       <BowlpoolTableHomeRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={checkIfWon(props.gameData, true) && props.gameData.completed}
-        unPlayed={new Date(props.gameData.startTime) > new Date()}
+        didWin={checkIfWon(props.gameData, true)}
+        unPlayed={props.gameData.completed}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
       />
       <BowlpoolTableAwayRow
         game={props.gameData}
         playerData={props.playerData}
-        didWin={checkIfWon(props.gameData, false) && props.gameData.completed}
-        unPlayed={new Date(props.gameData.startTime) > new Date()}
+        didWin={checkIfWon(props.gameData, false)}
+        unPlayed={props.gameData.completed}
         hideBowlData={props.hideBowlData}
         teamId={props.gameData.homeTeam.teamId}
       />
