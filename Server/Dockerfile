@@ -1,6 +1,6 @@
 # Dockerfile
 
-FROM node:21.1-bookworm-slim as base
+FROM node:21.4-bookworm-slim as base
 
 WORKDIR /home/node/app
 
