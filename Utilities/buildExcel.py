@@ -2,8 +2,7 @@ from openpyxl import Workbook
 import cfbdAPI
 from datetime import datetime
 import pytz
-import sys
-
+import argparse
 
 # Establish the CFB API connection
 API = cfbdAPI.api
@@ -62,9 +61,32 @@ def buildRow(sheet, rowNumber, game, records):
     sheet["C" + str(rowNumber + 1)] = getRecord(game.away_team, records)
 
 
-def main(args):
-    createFile(args[1], 2024)
+def main():
+    parser = argparse.ArgumentParser(
+        description="Create an Excel file with college football bowl game information."
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        required=True,
+        help='Output Excel file path (e.g., "bowlgames_2024.xlsx")',
+    )
+    parser.add_argument(
+        "-y",
+        "--year",
+        type=int,
+        required=True,
+        help="Year for which to generate bowl game data (e.g., 2024)",
+    )
+
+    args = parser.parse_args()
+
+    if args.year < 2000:
+        parser.error("Year must be 2000 or later")
+
+    createFile(args.output, args.year)
+    print(f"Successfully created bowl game Excel file: {args.output}")
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
