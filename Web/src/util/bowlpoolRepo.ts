@@ -13,7 +13,6 @@ export class bowlpoolRepo {
     let gameDataURL = localGameVersion
       ? `${this.url}/gameData/${year}?version=${localGameVersion}`
       : `${this.url}/gameData/${year}`;
-      console.log(gameDataURL)
     return new Promise<BowlGame[]>((resolve, reject) => {
       axios
         .get(gameDataURL)
@@ -48,7 +47,6 @@ export class bowlpoolRepo {
     let playerDataURL = localPlayerVersion
       ? `${this.url}/playerData/${year}?version=${localPlayerVersion}`
       : `${this.url}/playerData/${year}`;
-      
     return new Promise<Player[]>((resolve, reject) => {
       axios
         .get(playerDataURL)
