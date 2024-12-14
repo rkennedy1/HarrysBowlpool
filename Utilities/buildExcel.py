@@ -2,8 +2,7 @@ from openpyxl import Workbook
 import cfbdAPI
 from datetime import datetime
 import pytz
-import sys
-
+import argparse
 
 # Establish the CFB API connection
 API = cfbdAPI.api
@@ -24,16 +23,23 @@ def parseDate(date):
     return pst_date.strftime(dateFormat)
 
 
-def createFile(fileName):
+def createFile(fileName, year):
     wb = Workbook()
     ws = wb.active
 
     buildHeader(ws)
 
     rowID = 2  # games start on the 2nd row of the excel sheet
-    records = API.get_team_records(year=2023)
-    gamesAPI = API.get_games(year=2023, season_type="postseason", division="fbs")
-    for game in gamesAPI:
+    records = API.get_team_records(year=year)
+    gamesAPI = API.get_games(year=year, season_type="postseason", division="fbs")
+
+    # Sort games by start_date
+    sorted_games = sorted(
+        gamesAPI,
+        key=lambda game: datetime.strptime(game.start_date, "%Y-%m-%dT%H:%M:%S.%fZ"),
+    )
+
+    for game in sorted_games:
         buildRow(ws, rowID, game, records)
         rowID += 2  # we add 2 since each game takes up 2 rows in excel
 
@@ -55,9 +61,32 @@ def buildRow(sheet, rowNumber, game, records):
     sheet["C" + str(rowNumber + 1)] = getRecord(game.away_team, records)
 
 
-def main(args):
-    createFile(args[1])
+def main():
+    parser = argparse.ArgumentParser(
+        description="Create an Excel file with college football bowl game information."
+    )
+    parser.add_argument(
+        "-o",
+        "--output",
+        required=True,
+        help='Output Excel file path (e.g., "bowlgames_2024.xlsx")',
+    )
+    parser.add_argument(
+        "-y",
+        "--year",
+        type=int,
+        required=True,
+        help="Year for which to generate bowl game data (e.g., 2024)",
+    )
+
+    args = parser.parse_args()
+
+    if args.year < 2000:
+        parser.error("Year must be 2000 or later")
+
+    createFile(args.output, args.year)
+    print(f"Successfully created bowl game Excel file: {args.output}")
 
 
 if __name__ == "__main__":
-    main(sys.argv)
+    main()
