@@ -21,7 +21,6 @@ export interface Player {
 }
 
 export function isPlayersPick(pick: Pick, player: Player) {
-  console.log(pick.player, player.name);
   return pick.player == player.name;
 }
 

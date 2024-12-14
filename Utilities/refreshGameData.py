@@ -4,7 +4,6 @@ import mysql.connector
 from datetime import datetime
 import sys
 from versionUtil import getCurrentVersion, incrementVersion
-import pickle
 
 # Establish the CFB API connection
 API = cfbdAPI.api

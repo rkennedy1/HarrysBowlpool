@@ -1,4 +1,4 @@
-import mysql from 'mysql';
+const mysql = require('mysql2');
 import dotenv from 'dotenv';
 dotenv.config();
 

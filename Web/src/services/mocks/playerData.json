@@ -1,0 +1,792 @@
+[
+  {
+    "playerId": 6,
+    "name": "Player 6",
+    "points": 7,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 1,
+        "teamId": 102,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 2,
+        "teamId": 103,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 3,
+        "teamId": 105,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 4,
+        "teamId": 108,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 6,
+        "teamId": 111,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 8,
+        "teamId": 115,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 9,
+        "teamId": 117,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 6",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 2,
+    "name": "Player 2",
+    "points": 6,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 1,
+        "teamId": 101,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 2,
+        "teamId": 104,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 3,
+        "teamId": 105,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 4,
+        "teamId": 107,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 5,
+        "teamId": 110,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 6,
+        "teamId": 112,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 9,
+        "teamId": 117,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 2",
+        "gameId": 10,
+        "teamId": 119,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 3,
+    "name": "Player 3",
+    "points": 6,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 1,
+        "teamId": 101,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 2,
+        "teamId": 104,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 3,
+        "teamId": 105,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 4,
+        "teamId": 107,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 6,
+        "teamId": 112,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 8,
+        "teamId": 115,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 9,
+        "teamId": 118,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 3",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 10,
+    "name": "Player 10",
+    "points": 6,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 1,
+        "teamId": 102,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 2,
+        "teamId": 103,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 3,
+        "teamId": 106,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 4,
+        "teamId": 108,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 6,
+        "teamId": 111,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 8,
+        "teamId": 115,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 9,
+        "teamId": 117,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 10",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 1,
+    "name": "Player 1",
+    "points": 5,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 1,
+        "teamId": 102,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 2,
+        "teamId": 103,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 3,
+        "teamId": 106,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 4,
+        "teamId": 108,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 6,
+        "teamId": 111,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 7,
+        "teamId": 113,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 9,
+        "teamId": 117,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 1",
+        "gameId": 10,
+        "teamId": 119,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 5,
+    "name": "Player 5",
+    "points": 5,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 1,
+        "teamId": 101,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 2,
+        "teamId": 103,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 3,
+        "teamId": 105,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 4,
+        "teamId": 108,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 6,
+        "teamId": 112,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 9,
+        "teamId": 118,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 5",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 9,
+    "name": "Player 9",
+    "points": 5,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 1,
+        "teamId": 101,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 2,
+        "teamId": 104,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 3,
+        "teamId": 105,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 4,
+        "teamId": 107,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 5,
+        "teamId": 110,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 6,
+        "teamId": 112,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 7,
+        "teamId": 113,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 9,
+        "teamId": 117,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 9",
+        "gameId": 10,
+        "teamId": 119,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 4,
+    "name": "Player 4",
+    "points": 4,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 1,
+        "teamId": 102,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 2,
+        "teamId": 104,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 3,
+        "teamId": 106,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 4,
+        "teamId": 108,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 5,
+        "teamId": 110,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 6,
+        "teamId": 112,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 7,
+        "teamId": 114,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 9,
+        "teamId": 118,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 4",
+        "gameId": 10,
+        "teamId": 119,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 7,
+    "name": "Player 7",
+    "points": 3,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 1,
+        "teamId": 101,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 2,
+        "teamId": 103,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 3,
+        "teamId": 106,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 4,
+        "teamId": 107,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 5,
+        "teamId": 110,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 6,
+        "teamId": 111,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 7,
+        "teamId": 113,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 8,
+        "teamId": 115,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 9,
+        "teamId": 118,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 7",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  },
+  {
+    "playerId": 8,
+    "name": "Player 8",
+    "points": 3,
+    "year": 2024,
+    "picks": [
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 1,
+        "teamId": 102,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 2,
+        "teamId": 104,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 3,
+        "teamId": 106,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 4,
+        "teamId": 107,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 5,
+        "teamId": 109,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 6,
+        "teamId": 111,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 7,
+        "teamId": 113,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 8,
+        "teamId": 116,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 9,
+        "teamId": 118,
+        "version": 1
+      },
+      {
+        "year": 2024,
+        "player": "Player 8",
+        "gameId": 10,
+        "teamId": 120,
+        "version": 1
+      }
+    ],
+    "version": 1
+  }
+]

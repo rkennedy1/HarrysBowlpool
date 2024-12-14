@@ -2,8 +2,7 @@ version: '3.6'
 
 services:
   db:
-    image: mysql
-    command: --default-authentication-plugin=mysql_native_password
+    image: mysql:8.0
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD}
@@ -11,20 +10,24 @@ services:
       MYSQL_USER: ${MYSQL_USER}
       MYSQL_PASSWORD: ${MYSQL_PASSWORD}
     ports:
-      - 3306:3306
+      - '3306:3306'
     volumes:
       - ./init:/docker-entrypoint-initdb.d
+      - mysql-data:/var/lib/mysql
     networks:
       - bowlpool
 
   adminer:
-    image: adminer
+    image: adminer:latest
     restart: always
     ports:
-      - 8080:8080
+      - '8080:8080'
     networks:
       - bowlpool
 
 networks:
   bowlpool:
-    name: bowlpool
+    driver: bridge
+
+volumes:
+  mysql-data:

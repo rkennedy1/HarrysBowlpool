@@ -9,7 +9,7 @@ export type BowlGame = {
 export type BowlTeam = {
   teamId: number;
   name: string;
-  line: string;
+  line: number;
   score: number;
   record: string;
 };

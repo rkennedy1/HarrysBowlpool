@@ -57,7 +57,7 @@ def refreshAllPlayerData(year):
                     if pick[2] == game[1]:
                         if pick[3] == game[3] and didHomeTeamWin(homeTeam, awayTeam):
                             newScores[idx] += 1
-                        elif pick[3] == game[4] and didHomeTeamWin(awayTeam, homeTeam):
+                        elif pick[3] == game[4] and didHomeTeamWin(homeTeam, awayTeam):
                             newScores[idx] += 1
     playerUpdates = 0
     for idx, player in enumerate(players):

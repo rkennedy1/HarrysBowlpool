@@ -1,0 +1,192 @@
+[
+  {
+    "gameId": 1,
+    "bowlName": "Rose Bowl",
+    "startTime": "2023-12-30T17:00:00Z",
+    "homeTeam": {
+      "teamId": 101,
+      "name": "Team A",
+      "line": 3.5,
+      "score": 24,
+      "record": "10-2"
+    },
+    "awayTeam": {
+      "teamId": 102,
+      "name": "Team B",
+      "line": null,
+      "score": 21,
+      "record": "9-3"
+    }
+  },
+  {
+    "gameId": 2,
+    "bowlName": "Sugar Bowl",
+    "startTime": "2023-12-31T20:00:00Z",
+    "homeTeam": {
+      "teamId": 103,
+      "name": "Team C",
+      "line": null,
+      "score": 35,
+      "record": "11-1"
+    },
+    "awayTeam": {
+      "teamId": 104,
+      "name": "Team D",
+      "line": 7,
+      "score": 28,
+      "record": "10-2"
+    }
+  },
+  {
+    "gameId": 3,
+    "bowlName": "Orange Bowl",
+    "startTime": "2023-12-29T18:00:00Z",
+    "homeTeam": {
+      "teamId": 105,
+      "name": "Team E",
+      "line": 4,
+      "score": 27,
+      "record": "9-3"
+    },
+    "awayTeam": {
+      "teamId": 106,
+      "name": "Team F",
+      "line": null,
+      "score": 24,
+      "record": "8-4"
+    }
+  },
+  {
+    "gameId": 4,
+    "bowlName": "Fiesta Bowl",
+    "startTime": "2023-12-28T19:00:00Z",
+    "homeTeam": {
+      "teamId": 107,
+      "name": "Team G",
+      "line": null,
+      "score": 30,
+      "record": "10-2"
+    },
+    "awayTeam": {
+      "teamId": 108,
+      "name": "Team H",
+      "line": 6,
+      "score": 24,
+      "record": "9-3"
+    }
+  },
+  {
+    "gameId": 5,
+    "bowlName": "Peach Bowl",
+    "startTime": "2023-12-27T21:00:00Z",
+    "homeTeam": {
+      "teamId": 109,
+      "name": "Team I",
+      "line": 2.5,
+      "score": 21,
+      "record": "8-4"
+    },
+    "awayTeam": {
+      "teamId": 110,
+      "name": "Team J",
+      "line": null,
+      "score": 20,
+      "record": "7-5"
+    }
+  },
+  {
+    "gameId": 6,
+    "bowlName": "Cotton Bowl",
+    "startTime": "2023-12-26T22:00:00Z",
+    "homeTeam": {
+      "teamId": 111,
+      "name": "Team K",
+      "line": 5.5,
+      "score": 28,
+      "record": "9-3"
+    },
+    "awayTeam": {
+      "teamId": 112,
+      "name": "Team L",
+      "line": 5,
+      "score": 23,
+      "record": "8-4"
+    }
+  },
+  {
+    "gameId": 7,
+    "bowlName": "Citrus Bowl",
+    "startTime": "2023-12-25T16:00:00Z",
+    "homeTeam": {
+      "teamId": 113,
+      "name": "Team M",
+      "line": null,
+      "score": 24,
+      "record": "10-2"
+    },
+    "awayTeam": {
+      "teamId": 114,
+      "name": "Team N",
+      "line": 3,
+      "score": 21,
+      "record": "9-3"
+    }
+  },
+  {
+    "gameId": 8,
+    "bowlName": "Gator Bowl",
+    "startTime": "2023-12-24T18:00:00Z",
+    "homeTeam": {
+      "teamId": 115,
+      "name": "Team O",
+      "line": 4.5,
+      "score": 27,
+      "record": "8-4"
+    },
+    "awayTeam": {
+      "teamId": 116,
+      "name": "Team P",
+      "line": null,
+      "score": 23,
+      "record": "7-5"
+    }
+  },
+  {
+    "gameId": 9,
+    "bowlName": "Liberty Bowl",
+    "startTime": "2023-12-23T20:00:00Z",
+    "homeTeam": {
+      "teamId": 117,
+      "name": "Team Q",
+      "line": null,
+      "score": 31,
+      "record": "9-3"
+    },
+    "awayTeam": {
+      "teamId": 118,
+      "name": "Team R",
+      "line": 6.5,
+      "score": 24,
+      "record": "8-4"
+    }
+  },
+  {
+    "gameId": 10,
+    "bowlName": "Sun Bowl",
+    "startTime": "2023-12-22T19:00:00Z",
+    "homeTeam": {
+      "teamId": 119,
+      "name": "Team S",
+      "line": 3.5,
+      "score": 28,
+      "record": "10-2"
+    },
+    "awayTeam": {
+      "teamId": 120,
+      "name": "Team T",
+      "line": null,
+      "score": 24,
+      "record": "9-3"
+    }
+  }
+]
