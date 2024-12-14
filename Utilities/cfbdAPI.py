@@ -4,8 +4,6 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
-configuration = cfbd.Configuration()
-configuration.api_key['Authorization'] = os.getenv('CFB_API_KEY')
-configuration.api_key_prefix['Authorization'] = 'Bearer'
+configuration = cfbd.Configuration(access_token=os.getenv("CFB_API_KEY"))
 
 api = cfbd.GamesApi(cfbd.ApiClient(configuration))
