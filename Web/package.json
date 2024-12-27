@@ -28,7 +28,7 @@
     "react-router-dom": "^6.18.0",
     "react-scripts": "^5.0.1",
     "styled-components": "^6.1.0",
-    "typescript": "^5.3.2"
+    "typescript": "^5.7.2"
   },
   "scripts": {
     "deploy-production": "export REACT_APP_API_URL='https://api.harrysbowlpool.com' && react-scripts build && scp -r ./build/* root@harrysbowlpool.com:/var/www/www.harrysbowlpool.com/build",
